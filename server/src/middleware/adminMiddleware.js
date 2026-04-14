@@ -9,7 +9,7 @@ const isAdmin = async (req, res, next) => {
     });
 
     if (!role) {
-      return res.status(403).json({ message: "Admin Only" });
+      return res.status(403).json({ message: "Admin access required" });
     }
 
     next();
