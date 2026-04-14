@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import Position from "./Position.model";
 
 const employeeSchema = new Schema(
   {
@@ -14,7 +13,7 @@ const employeeSchema = new Schema(
     phone: String,
     position: {
       type: Schema.Types.ObjectId,
-      ref: Position
+      ref: "Position"
     },
     hireDate: {
       type: Date,
