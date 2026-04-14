@@ -18,7 +18,23 @@ const getEmployees = async (req, res) => {
   res.json(employees);
 };
 
+const updateEmployee = async (req, res) => {
+  const employee = await Employee.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  )
+};
+
+const deleteEmployee = async (req, res) => {
+  await Employee.findByIdAndDelete(req.params.id);
+  
+  res.json({ message: "Employee deleted" });
+}
+
 export {
   createEmployee,
-  getEmployees
+  getEmployees,
+  updateEmployee,
+  deleteEmployee
 }
