@@ -23,7 +23,9 @@ const updateEmployee = async (req, res) => {
     req.params.id,
     req.body,
     { new: true }
-  )
+  );
+
+  res.json(employee);
 };
 
 const deleteEmployee = async (req, res) => {
