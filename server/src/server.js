@@ -7,17 +7,24 @@ import authRoutes from "./routes/authRoutes.js";
 import positionRoutes from "./routes/positionRoutes.js";
 import payrollRoutes from "./routes/payrollRoutes.js"
 
+// Initialize express app
 const app = express();
+
 const PORT = process.env.PORT || 5000
 
+// Connect to MongoDB database
 connectDB();
+
 app.use(cors());
+
+// Middleware to parse incoming JSON requests
 app.use(express.json());
 
+// Register API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/positions", positionRoutes);
 app.use("/api/payroll", payrollRoutes);
 
-
+// Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
