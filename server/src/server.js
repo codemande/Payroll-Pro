@@ -10,7 +10,7 @@ import payrollRoutes from "./routes/payrollRoutes.js"
 // Initialize express app
 const app = express();
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8000
 
 // Connect to MongoDB database
 connectDB();

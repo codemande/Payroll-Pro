@@ -8,7 +8,9 @@ export default function (req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const actualToken = token.replace("Bearer ", "");
+
+    const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
 
     req.user = decoded;
 
