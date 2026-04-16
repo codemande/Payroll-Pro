@@ -1,0 +1,37 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+/* Root Variables */
+:root {
+  --background: hsl(220, 20%, 97%);
+  --foreground: hsl(220, 30%, 10%);
+
+  --card: hsl(0, 0%, 100%);
+  --primary: hsl(220, 60%, 20%);
+  --secondary: hsl(220, 15%, 92%);
+  --accent: hsl(38, 90%, 55%);
+
+  --border: hsl(220, 15%, 90%);
+  --success: hsl(152, 60%, 40%);
+  --warning: hsl(38, 92%, 50%);
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display Font */
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
