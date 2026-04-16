@@ -1,0 +1,25 @@
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.access-denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  gap: 10px;
+}
+
+.access-denied h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.access-denied p {
+  color: #777;
+}
