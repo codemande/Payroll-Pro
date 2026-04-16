@@ -1,0 +1,51 @@
+/* Item container */
+.accordion-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Header wrapper */
+.accordion-header {
+  display: flex;
+}
+
+/* Clickable trigger */
+.accordion-trigger {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.accordion-trigger:hover {
+  text-decoration: underline;
+}
+
+/* Icon animation */
+.accordion-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate when open (Radix adds data-state) */
+.accordion-trigger[data-state="open"] .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Content wrapper */
+.accordion-content {
+  overflow: hidden;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Inner padding */
+.accordion-inner {
+  padding-bottom: 16px;
+}
