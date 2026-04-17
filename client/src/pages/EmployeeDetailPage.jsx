@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { ArrowLeft, DollarSign, Plus, Pencil } from "lucide-react";
-// Assuming you have a toast library setup, if not, you can use standard alerts like in EmployeesPage
+
 import { toast } from "sonner"; 
 
 export default function EmployeeDetailPage() {
@@ -328,7 +328,7 @@ export default function EmployeeDetailPage() {
   );
 }
 
-// Clean JavaScript Row Component (No TypeScript interfaces)
+
 function Row({ label, value, negative, bold }) {
   return (
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
