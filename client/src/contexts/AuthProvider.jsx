@@ -48,7 +48,9 @@ export function AuthProvider({ children }) {
       await authService.logout();
       setUser(null);
       setIsAdmin(false);
-    } catch {}
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
