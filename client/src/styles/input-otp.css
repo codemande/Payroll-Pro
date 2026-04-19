@@ -1,0 +1,74 @@
+.otp-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.otp-container:has(:disabled) {
+  opacity: 0.5;
+}
+
+.otp-input:disabled {
+  cursor: not-allowed;
+}
+
+.otp-group {
+  display: flex;
+  align-items: center;
+}
+
+.otp-slot {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--input);
+  border-bottom: 1px solid var(--input);
+  border-right: 1px solid var(--input);
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.otp-slot:first-child {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+  border-left: 1px solid var(--input);
+}
+
+.otp-slot:last-child {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.otp-slot.is-active {
+  z-index: 10;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.otp-caret-wrapper {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otp-caret {
+  height: 1rem;
+  width: 1px;
+  background-color: var(--foreground);
+  animation: otp-caret-blink 1s step-end infinite;
+}
+
+.otp-separator {
+  display: flex;
+  align-items: center;
+}
+
+@keyframes otp-caret-blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
