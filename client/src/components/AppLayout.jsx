@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "../components/ui/button";
+import "../styles/layout.css";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/" },
@@ -24,24 +25,24 @@ export default function AppLayout({ children }) {
   const location = useLocation();
 
   return (
-    <div className="flex min-h-screen">
+    <div className="layout-container">
 
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 flex h-screen w-64 flex-col bg-sidebar text-sidebar-foreground">
+      <aside className="sidebar">
 
         {/* Logo */}
-        <div className="flex h-16 items-center gap-3 border-b px-6">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sidebar-primary">
-            <Receipt className="h-4 w-4 text-sidebar-primary-foreground" />
+        <div className="sidebar-header">
+          <div className="sidebar-logo-box">
+            <Receipt className="sidebar-logo-icon" />
           </div>
 
-          <span className="text-lg font-bold text-sidebar-primary">
+          <span className="sidebar-logo-text">
             PayrollPro
           </span>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 space-y-1 px-3 py-4">
+        <nav className="sidebar-nav">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
 
@@ -49,17 +50,13 @@ export default function AppLayout({ children }) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm ${
-                  isActive
-                    ? "bg-sidebar-accent text-sidebar-primary"
-                    : "hover:bg-sidebar-accent"
-                }`}
+                className={`sidebar-nav-link ${isActive ? "active" : ""}`}
               >
-                <item.icon className="h-4 w-4" />
+                <item.icon className="sidebar-nav-icon" />
                 {item.label}
 
                 {isActive && (
-                  <ChevronRight className="ml-auto h-4 w-4" />
+                  <ChevronRight className="sidebar-nav-chevron" />
                 )}
               </Link>
             );
@@ -67,16 +64,16 @@ export default function AppLayout({ children }) {
         </nav>
 
         {/* Footer (user + logout) */}
-        <div className="border-t p-4">
-          <div className="mb-3 text-xs">
+        <div className="sidebar-footer">
+          <div className="sidebar-user-info">
             {user?.email}
           </div>
 
           <Button
             onClick={signOut}
-            className="w-full flex items-center gap-2"
+            className="sidebar-logout-btn"
           >
-            <LogOut className="h-4 w-4" />
+            <LogOut className="sidebar-logout-icon" />
             Sign Out
           </Button>
         </div>
@@ -84,8 +81,8 @@ export default function AppLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 flex-1 p-8">
-        <div className="mx-auto max-w-7xl">
+      <main className="main-content">
+        <div className="main-content-inner">
           {children}
         </div>
       </main>
