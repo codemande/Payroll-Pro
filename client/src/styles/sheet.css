@@ -1,0 +1,159 @@
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.sheet-overlay[data-state="open"] {
+  animation: sheet-fade-in 150ms ease-out;
+}
+
+.sheet-overlay[data-state="closed"] {
+  animation: sheet-fade-out 150ms ease-in;
+}
+
+.sheet-content {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--background);
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+/* Side Variants */
+.sheet-side-top {
+  inset-inline: 0;
+  top: 0;
+  border-bottom: 1px solid var(--border);
+}
+.sheet-side-top[data-state="open"] { animation: sheet-slide-in-top 300ms ease-out; }
+.sheet-side-top[data-state="closed"] { animation: sheet-slide-out-top 300ms ease-in; }
+
+.sheet-side-bottom {
+  inset-inline: 0;
+  bottom: 0;
+  border-top: 1px solid var(--border);
+}
+.sheet-side-bottom[data-state="open"] { animation: sheet-slide-in-bottom 300ms ease-out; }
+.sheet-side-bottom[data-state="closed"] { animation: sheet-slide-out-bottom 300ms ease-in; }
+
+.sheet-side-left {
+  inset-block: 0;
+  left: 0;
+  height: 100%;
+  width: 75%;
+  border-right: 1px solid var(--border);
+}
+.sheet-side-left[data-state="open"] { animation: sheet-slide-in-left 300ms ease-out; }
+.sheet-side-left[data-state="closed"] { animation: sheet-slide-out-left 300ms ease-in; }
+
+.sheet-side-right {
+  inset-block: 0;
+  right: 0;
+  height: 100%;
+  width: 75%;
+  border-left: 1px solid var(--border);
+}
+.sheet-side-right[data-state="open"] { animation: sheet-slide-in-right 300ms ease-out; }
+.sheet-side-right[data-state="closed"] { animation: sheet-slide-out-right 300ms ease-in; }
+
+@media (min-width: 640px) {
+  .sheet-side-left, .sheet-side-right {
+    max-width: 24rem; /* sm:max-w-sm */
+  }
+}
+
+/* Sub-components */
+.sheet-close-btn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  border-radius: 0.125rem;
+  opacity: 0.7;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.sheet-close-btn:hover {
+  opacity: 1;
+}
+
+.sheet-close-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.sheet-close-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .sheet-header { text-align: left; }
+}
+
+.sheet-footer {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 640px) {
+  .sheet-footer {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
+
+.sheet-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.sheet-description {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+/* Keyframes */
+@keyframes sheet-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sheet-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes sheet-slide-in-top { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes sheet-slide-out-top { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+
+@keyframes sheet-slide-in-bottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes sheet-slide-out-bottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
+
+@keyframes sheet-slide-in-left { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes sheet-slide-out-left { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+@keyframes sheet-slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes sheet-slide-out-right { from { transform: translateX(0); } to { transform: translateX(100%); } }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
