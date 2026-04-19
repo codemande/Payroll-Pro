@@ -1,9 +1,13 @@
-import { cn } from "../../lib/utils";
+import "../../styles/skeleton.css";
+
+function cn(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 function Skeleton({ className, ...props }) {
   return (
     <div
-      className={cn("animate-pulse rounded-md bg-muted", className)}
+      className={cn("skeleton", className)}
       {...props}
     />
   );
