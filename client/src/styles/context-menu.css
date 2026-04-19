@@ -1,0 +1,133 @@
+.context-menu-content,
+.context-menu-sub-content {
+  z-index: 50;
+  min-width: 8rem;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid var(--border);
+  background-color: var(--popover);
+  padding: 0.25rem;
+  color: var(--popover-foreground);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.context-menu-content[data-state="open"],
+.context-menu-sub-content[data-state="open"] {
+  animation: context-menu-in 150ms ease-out;
+}
+
+.context-menu-content[data-state="closed"],
+.context-menu-sub-content[data-state="closed"] {
+  animation: context-menu-out 150ms ease-in;
+}
+
+.context-menu-item,
+.context-menu-sub-trigger,
+.context-menu-checkbox-item,
+.context-menu-radio-item {
+  position: relative;
+  display: flex;
+  cursor: default;
+  user-select: none;
+  align-items: center;
+  border-radius: 0.125rem;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.context-menu-item.is-inset,
+.context-menu-sub-trigger.is-inset,
+.context-menu-label.is-inset {
+  padding-left: 2rem;
+}
+
+.context-menu-item:focus,
+.context-menu-sub-trigger:focus,
+.context-menu-sub-trigger[data-state="open"],
+.context-menu-checkbox-item:focus,
+.context-menu-radio-item:focus {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.context-menu-item[data-disabled],
+.context-menu-checkbox-item[data-disabled],
+.context-menu-radio-item[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.context-menu-sub-trigger-icon {
+  margin-left: auto;
+  height: 1rem;
+  width: 1rem;
+}
+
+.context-menu-checkbox-item,
+.context-menu-radio-item {
+  padding-left: 2rem;
+}
+
+.context-menu-indicator-wrapper {
+  position: absolute;
+  left: 0.5rem;
+  display: flex;
+  height: 0.875rem;
+  width: 0.875rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.context-menu-check-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.context-menu-radio-icon {
+  height: 0.5rem;
+  width: 0.5rem;
+  fill: currentColor;
+}
+
+.context-menu-label {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.context-menu-separator {
+  margin: 0.25rem -0.25rem;
+  height: 1px;
+  background-color: var(--border);
+}
+
+.context-menu-shortcut {
+  margin-left: auto;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--muted-foreground);
+}
+
+@keyframes context-menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes context-menu-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
