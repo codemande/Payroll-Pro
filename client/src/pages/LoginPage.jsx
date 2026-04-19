@@ -8,9 +8,12 @@ import { Card, CardContent, CardHeader } from "../components/ui/card";
 
 import { Lock, Mail, AlertCircle } from "lucide-react";
 
+import "../styles/login.css";
+
 export default function LoginPage() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,51 +30,52 @@ export default function LoginPage() {
     if (result.error) {
       setError(result.error);
     } else {
-      navigate("/"); 
+      navigate("/");
     }
 
     setLoading(false);
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-primary p-4">
-      <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-accent">
-            <Lock className="h-7 w-7 text-accent-foreground" />
+    <div className="login-page">
+      <div className="login-container">
+        {/* Header */}
+        <div className="login-header">
+          <div className="login-logo">
+            <Lock className="login-logo-icon" />
           </div>
 
-          <h1 className="text-3xl font-bold text-primary-foreground">
-            PayrollPro
-          </h1>
+          <h1 className="login-title">PayrollPro</h1>
 
-          <p className="mt-2 text-sm text-sidebar-muted">
+          <p className="login-subtitle">
             Admin Payroll Management System
           </p>
         </div>
 
-        <Card className="border-0 shadow-2xl">
-          <CardHeader className="pb-4 pt-6">
-            <h2 className="text-center text-lg font-semibold text-foreground">
+        {/* Card */}
+        <Card className="login-card">
+          <CardHeader className="login-card-header">
+            <h2 className="login-card-title">
               Sign in to your account
             </h2>
           </CardHeader>
 
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="login-form">
 
               {error && (
-                <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-sm text-destructive">
-                  <AlertCircle className="h-4 w-4" />
+                <div className="login-error">
+                  <AlertCircle className="login-error-icon" />
                   {error}
                 </div>
               )}
 
-              <div className="space-y-2">
+              {/* Email */}
+              <div className="login-field">
                 <Label htmlFor="email">Email</Label>
 
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <div className="login-input-wrapper">
+                  <Mail className="login-input-icon" />
 
                   <Input
                     id="email"
@@ -79,17 +83,18 @@ export default function LoginPage() {
                     placeholder="admin@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10"
+                    className="login-input"
                     required
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
+              {/* Password */}
+              <div className="login-field">
                 <Label htmlFor="password">Password</Label>
 
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <div className="login-input-wrapper">
+                  <Lock className="login-input-icon" />
 
                   <Input
                     id="password"
@@ -97,7 +102,7 @@ export default function LoginPage() {
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10"
+                    className="login-input"
                     required
                   />
                 </div>
@@ -105,7 +110,7 @@ export default function LoginPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-accent text-accent-foreground"
+                className="login-submit"
                 disabled={loading}
               >
                 {loading ? "Signing in..." : "Sign In"}
@@ -115,7 +120,7 @@ export default function LoginPage() {
           </CardContent>
         </Card>
 
-        <p className="mt-6 text-center text-xs text-sidebar-muted">
+        <p className="login-footer-text">
           Contact your system administrator for access
         </p>
       </div>
