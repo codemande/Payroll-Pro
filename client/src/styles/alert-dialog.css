@@ -1,0 +1,111 @@
+.alert-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.alert-dialog-overlay[data-state="open"] {
+  animation: alert-fade-in 150ms ease-out;
+}
+
+.alert-dialog-overlay[data-state="closed"] {
+  animation: alert-fade-out 150ms ease-in;
+}
+
+.alert-dialog-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 50;
+  display: grid;
+  width: 100%;
+  max-width: 32rem;
+  transform: translate(-50%, -50%);
+  gap: 1rem;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition-duration: 200ms;
+}
+
+.alert-dialog-content[data-state="open"] {
+  animation: alert-zoom-in 150ms ease-out;
+}
+
+.alert-dialog-content[data-state="closed"] {
+  animation: alert-zoom-out 150ms ease-in;
+}
+
+@media (min-width: 640px) {
+  .alert-dialog-content {
+    border-radius: 0.5rem;
+  }
+}
+
+.alert-dialog-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .alert-dialog-header {
+    text-align: left;
+  }
+}
+
+.alert-dialog-footer {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 640px) {
+  .alert-dialog-footer {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
+
+.alert-dialog-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.alert-dialog-description {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.alert-dialog-cancel {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .alert-dialog-cancel {
+    margin-top: 0;
+  }
+}
+
+@keyframes alert-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes alert-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes alert-zoom-in {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes alert-zoom-out {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+}
