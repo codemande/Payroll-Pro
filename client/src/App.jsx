@@ -14,17 +14,16 @@ import EmployeeDetailPage from "./pages/EmployeeDetailPage";
 import PositionsPage from "./pages/PositionsPage";
 import DeductionsPage from "./pages/DeductionsPage";
 import NotFound from "./pages/NotFound";
-
 import "./styles/app.css";
 
 const queryClient = new QueryClient();
 
 function ProtectedRoute({ children }) {
-  const { session, isAdmin, loading } = useAuth();
+  const { user, isAdmin, loading } = useAuth();
 
   if (loading) return <div className="center-screen">Loading...</div>;
 
-  if (!session) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/login" replace />;
 
   if (!isAdmin)
     return (
@@ -38,7 +37,7 @@ function ProtectedRoute({ children }) {
 }
 
 function AppRoutes() {
-  const { session, loading } = useAuth();
+  const { user, loading } = useAuth();
 
   if (loading) return <div className="center-screen">Loading...</div>;
 
@@ -46,7 +45,7 @@ function AppRoutes() {
     <Routes>
       <Route
         path="/login"
-        element={session ? <Navigate to="/" replace /> : <LoginPage />}
+        element={user ? <Navigate to="/" replace /> : <LoginPage />}
       />
 
       <Route

@@ -54,11 +54,39 @@ const login = async (req, res) => {
     { expiresIn: "1d" }
   );
 
-  res.json({ token });
+  res.cookie("token", token, {
+    httpOnly: true, 
+    secure: process.env.NODE_ENV === "production", 
+    // sameSite: "strict",
+    sameSite: "lax",
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  }).json({ 
+    message: "Login successful",
+    user: { id: user._id, email: user.email } 
+  });
 
 };
 
+//Current User
+const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    const roleDoc = await Role.findOne({user: user._id});
+
+    res.json({
+      user: {
+        ...user._doc,
+        role: roleDoc ? roleDoc.role : "user"
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user" });
+  }
+}
+
 export {
   register,
-  login
+  login,
+  getMe
 };

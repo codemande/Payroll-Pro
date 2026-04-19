@@ -1,16 +1,15 @@
 import jwt from "jsonwebtoken";
 
 export default function (req, res, next) {
-  const token = req.header("Authorization");
+
+  const token = req.cookies.token;
 
   if(!token) {
     return res.status(401).json({ message: "No Token" });
   }
 
   try {
-    const actualToken = token.replace("Bearer ", "");
-
-    const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = decoded;
 
