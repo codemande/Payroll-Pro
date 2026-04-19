@@ -1,0 +1,4 @@
+.toast-text-wrapper {
+  display: grid;
+  gap: 0.25rem; /* Equivalent to gap-1 */
+}

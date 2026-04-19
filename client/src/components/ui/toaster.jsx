@@ -8,6 +8,8 @@ import {
   ToastViewport,
 } from "./toast";
 
+import "../../styles/toasterr.css";
+
 export function Toaster() {
   const { toasts } = useToast();
 
@@ -15,7 +17,7 @@ export function Toaster() {
     <ToastProvider>
       {toasts.map(({ id, title, description, action, ...props }) => (
         <Toast key={id} {...props}>
-          <div className="grid gap-1">
+          <div className="toast-text-wrapper">
             {title && <ToastTitle>{title}</ToastTitle>}
             {description && (
               <ToastDescription>{description}</ToastDescription>
