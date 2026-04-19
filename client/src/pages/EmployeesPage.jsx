@@ -8,7 +8,9 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Card, CardContent } from "../components/ui/card";
 
-import { Plus, Search, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
+
+import "../styles/employees.css";
 
 export default function EmployeesPage() {
   const queryClient = useQueryClient();
@@ -25,7 +27,6 @@ export default function EmployeesPage() {
     tax_rate: "",
   });
 
-  // GET employees
   const { data: employees = [], isLoading } = useQuery({
     queryKey: ["employees"],
     queryFn: async () => {
@@ -34,7 +35,6 @@ export default function EmployeesPage() {
     },
   });
 
-  // ADD employee
   const addEmployee = useMutation({
     mutationFn: async () => {
       await api.post("/employees", {
@@ -43,7 +43,6 @@ export default function EmployeesPage() {
         tax_rate: Number(form.tax_rate),
       });
     },
-
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
 
@@ -60,13 +59,11 @@ export default function EmployeesPage() {
 
       alert("Employee added successfully");
     },
-
     onError: (err) => {
       alert(err.message);
     },
   });
 
-  // search filter
   const filtered = employees.filter((e) =>
     `${e.first_name} ${e.last_name} ${e.employee_number}`
       .toLowerCase()
@@ -74,12 +71,15 @@ export default function EmployeesPage() {
   );
 
   return (
-    <div>
-      <h1>Employees ({employees.length})</h1>
+    <div className="employees-page">
+      <h1 className="employees-title">
+        Employees ({employees.length})
+      </h1>
 
       {/* Add Employee */}
-      <div style={{ marginBottom: "20px" }}>
+      <div className="employees-form">
         <input
+          className="employees-input"
           placeholder="Employee Number"
           value={form.employee_number}
           onChange={(e) =>
@@ -88,6 +88,7 @@ export default function EmployeesPage() {
         />
 
         <input
+          className="employees-input"
           placeholder="First Name"
           value={form.first_name}
           onChange={(e) =>
@@ -96,6 +97,7 @@ export default function EmployeesPage() {
         />
 
         <input
+          className="employees-input"
           placeholder="Last Name"
           value={form.last_name}
           onChange={(e) =>
@@ -104,6 +106,7 @@ export default function EmployeesPage() {
         />
 
         <input
+          className="employees-input"
           placeholder="Salary"
           value={form.base_salary}
           onChange={(e) =>
@@ -111,13 +114,17 @@ export default function EmployeesPage() {
           }
         />
 
-        <button onClick={() => addEmployee.mutate()}>
+        <button
+          className="employees-add-btn"
+          onClick={() => addEmployee.mutate()}
+        >
           Add Employee
         </button>
       </div>
 
       {/* Search */}
       <Input
+        className="employees-search"
         placeholder="Search..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -125,13 +132,13 @@ export default function EmployeesPage() {
 
       {/* Table */}
       {isLoading ? (
-        <p>Loading...</p>
+        <p className="employees-loading">Loading...</p>
       ) : filtered.length === 0 ? (
         <Card>
           <CardContent>No employees found</CardContent>
         </Card>
       ) : (
-        <table border="1" width="100%">
+        <table className="employees-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -154,8 +161,8 @@ export default function EmployeesPage() {
 
                 <td>
                   <Link to={`/employees/${emp._id}`}>
-                    <Button>
-                      <Eye /> View
+                    <Button className="employees-view-btn">
+                      <Eye size={16} /> View
                     </Button>
                   </Link>
                 </td>

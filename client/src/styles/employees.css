@@ -1,0 +1,67 @@
+.employees-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.employees-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Form */
+.employees-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.employees-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.employees-add-btn {
+  padding: 8px 12px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Search */
+.employees-search {
+  max-width: 300px;
+}
+
+/* Table */
+.employees-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employees-table th,
+.employees-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.employees-table th {
+  background: #f9fafb;
+}
+
+/* Button */
+.employees-view-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Loading */
+.employees-loading {
+  color: #777;
+}
