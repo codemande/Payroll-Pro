@@ -1,0 +1,101 @@
+.employee-page {
+  padding: 20px;
+}
+
+/* Back button */
+.back-btn {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 8px;
+}
+
+/* Header */
+.employee-header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.employee-name {
+  font-size: 1.875rem;
+  font-weight: bold;
+}
+
+.employee-meta {
+  margin-top: 0.25rem;
+  color: gray;
+}
+
+/* Status badge */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Grid */
+.grid-2 {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* spacing inside cards */
+.space-y > * + * {
+  margin-top: 12px;
+}
+
+/* divider */
+.divider {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+}
+
+/* row component */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: gray;
+}
+
+.label.bold {
+  font-weight: 600;
+  color: inherit;
+}
+
+.value {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.value.big {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.value.negative {
+  color: #dc2626;
+}
+
+/* loading */
+.loading-text {
+  color: gray;
+}

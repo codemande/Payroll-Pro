@@ -21,9 +21,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { ArrowLeft, DollarSign, Plus, Pencil } from "lucide-react";
+import { ArrowLeft, Plus, Pencil } from "lucide-react";
 
 import { toast } from "sonner"; 
+import "../styles/employee-detail.css";
 
 export default function EmployeeDetailPage() {
   const { id } = useParams();
@@ -41,7 +42,6 @@ export default function EmployeeDetailPage() {
     end_date: "" 
   });
 
-  // GET Employee Details
   const { data: employee, isLoading } = useQuery({
     queryKey: ["employee", id],
     queryFn: async () => {
@@ -50,7 +50,6 @@ export default function EmployeeDetailPage() {
     },
   });
 
-  // GET Employee Deductions
   const { data: deductions = [] } = useQuery({
     queryKey: ["employee-deductions", id],
     queryFn: async () => {
@@ -59,7 +58,6 @@ export default function EmployeeDetailPage() {
     },
   });
 
-  // GET Salary History
   const { data: salaryHistory = [] } = useQuery({
     queryKey: ["salary-history", id],
     queryFn: async () => {
@@ -68,7 +66,6 @@ export default function EmployeeDetailPage() {
     },
   });
 
-  // GET Available Deduction Types
   const { data: deductionTypes = [] } = useQuery({
     queryKey: ["deduction-types"],
     queryFn: async () => {
@@ -77,13 +74,10 @@ export default function EmployeeDetailPage() {
     },
   });
 
-  // UPDATE Salary
   const changeSalary = useMutation({
     mutationFn: async () => {
       if (!employee) return;
       const salary = parseFloat(newSalary);
-      
-      // Sending update to Express backend
       await api.put(`/employees/${id}`, { 
         base_salary: salary,
         salary_reason: salaryReason || null 
@@ -101,7 +95,6 @@ export default function EmployeeDetailPage() {
     onError: (err) => toast.error(err.message),
   });
 
-  // ADD Deduction
   const addDeduction = useMutation({
     mutationFn: async () => {
       await api.post(`/employees/${id}/deductions`, {
@@ -126,7 +119,7 @@ export default function EmployeeDetailPage() {
   });
 
   if (isLoading || !employee) {
-    return <p style={{ color: "gray" }}>Loading...</p>;
+    return <p className="employee-detail-loading">Loading...</p>;
   }
 
   const monthlySalary = Number(employee.base_salary);
@@ -142,45 +135,37 @@ export default function EmployeeDetailPage() {
   const yearlyNet = monthlyNet * 13;
 
   return (
-    <div>
-      <Button variant="ghost" style={{ marginBottom: "1rem", display: "flex", gap: "8px" }} onClick={() => navigate("/employees")}>
+    <div className="employee-detail-page">
+      <Button variant="ghost" className="employee-detail-back-btn" onClick={() => navigate("/employees")}>
         <ArrowLeft size={16} /> Back to Employees
       </Button>
 
-      <div style={{ marginBottom: "1.5rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "1rem" }}>
+      <div className="employee-detail-header">
         <div>
-          <h1 style={{ fontSize: "1.875rem", fontWeight: "bold" }}>
+          <h1 className="employee-detail-name">
             {employee.first_name} {employee.last_name}
           </h1>
-          <p style={{ marginTop: "0.25rem", color: "gray" }}>
+          <p className="employee-detail-info">
             #{employee.employee_number} · {employee.position?.title || "No position"} · {employee.position?.department || ""}
           </p>
         </div>
-        <span style={{ 
-          padding: "4px 12px", 
-          borderRadius: "9999px", 
-          fontSize: "0.875rem", 
-          fontWeight: "500",
-          backgroundColor: employee.is_active ? "#dcfce7" : "#fee2e2",
-          color: employee.is_active ? "#166534" : "#991b1b"
-        }}>
+        <span className={`employee-detail-status ${employee.is_active ? "active" : "inactive"}`}>
           {employee.is_active ? "Active" : "Inactive"}
         </span>
       </div>
 
-      {/* Financial Summary */}
-      <div style={{ display: "grid", gap: "1.25rem", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}>
+      <div className="employee-detail-grid">
         <Card>
           <CardHeader>
             <CardTitle>Monthly Breakdown</CardTitle>
           </CardHeader>
-          <CardContent style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <CardContent className="employee-detail-card-content">
             <Row label="Gross Salary" value={monthlySalary} />
             <Row label={`Tax (${employee.tax_rate}%)`} value={-monthlyTax} negative />
             {activeDeductions.map((d) => (
               <Row key={d._id} label={`${d.deduction_type?.name} (${d.percentage}%)`} value={-(monthlySalary * Number(d.percentage)) / 100} negative />
             ))}
-            <div style={{ borderTop: "1px solid #e5e7eb", paddingTop: "12px" }}>
+            <div className="employee-detail-net-wrapper">
               <Row label="Net Salary" value={monthlyNet} bold />
             </div>
           </CardContent>
@@ -190,36 +175,33 @@ export default function EmployeeDetailPage() {
           <CardHeader>
             <CardTitle>Yearly Breakdown (13 Months)</CardTitle>
           </CardHeader>
-          <CardContent style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <CardContent className="employee-detail-card-content">
             <Row label="Gross Salary" value={yearlySalary} />
             <Row label="Total Tax" value={-yearlyTax} negative />
             <Row label="Total Deductions" value={-yearlyDeductions} negative />
-            <div style={{ borderTop: "1px solid #e5e7eb", paddingTop: "12px" }}>
+            <div className="employee-detail-net-wrapper">
               <Row label="Net Salary" value={yearlyNet} bold />
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Salary & Deductions management */}
-      <div style={{ marginTop: "1.5rem", display: "grid", gap: "1.25rem", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}>
-        
-        {/* Change salary */}
+      <div className="employee-detail-grid management">
         <Card>
-          <CardHeader style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <CardHeader className="employee-detail-card-header-flex">
             <CardTitle>Salary History</CardTitle>
             <Dialog open={salaryDialogOpen} onOpenChange={setSalaryDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" variant="outline" style={{ display: "flex", gap: "6px" }}>
+                <Button size="sm" variant="outline" className="employee-detail-action-btn">
                   <Pencil size={14} /> Change Salary
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader><DialogTitle>Change Salary</DialogTitle></DialogHeader>
-                <form onSubmit={(e) => { e.preventDefault(); changeSalary.mutate(); }} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <form onSubmit={(e) => { e.preventDefault(); changeSalary.mutate(); }} className="employee-detail-form">
                   <div>
                     <Label>Current Salary</Label>
-                    <p style={{ fontSize: "1.125rem", fontWeight: "600" }}>${monthlySalary.toLocaleString()}</p>
+                    <p className="employee-detail-current-salary">${monthlySalary.toLocaleString()}</p>
                   </div>
                   <div>
                     <Label>New Monthly Salary</Label>
@@ -238,16 +220,16 @@ export default function EmployeeDetailPage() {
           </CardHeader>
           <CardContent>
             {salaryHistory.length === 0 ? (
-              <p style={{ color: "gray", fontSize: "0.875rem" }}>No salary changes recorded.</p>
+              <p className="employee-detail-empty">No salary changes recorded.</p>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div className="employee-detail-list">
                 {salaryHistory.map((h) => (
-                  <div key={h._id} style={{ display: "flex", justifyContent: "space-between", backgroundColor: "#f3f4f6", padding: "8px 12px", borderRadius: "8px" }}>
+                  <div key={h._id} className="employee-detail-list-item">
                     <div>
                       <p>${Number(h.previous_salary).toLocaleString()} → ${Number(h.new_salary).toLocaleString()}</p>
-                      <p style={{ fontSize: "0.75rem", color: "gray" }}>{h.reason || "No reason"}</p>
+                      <p className="employee-detail-subtext">{h.reason || "No reason"}</p>
                     </div>
-                    <span style={{ fontSize: "0.75rem", color: "gray" }}>{new Date(h.effective_date).toLocaleDateString()}</span>
+                    <span className="employee-detail-subtext">{new Date(h.effective_date).toLocaleDateString()}</span>
                   </div>
                 ))}
               </div>
@@ -255,19 +237,18 @@ export default function EmployeeDetailPage() {
           </CardContent>
         </Card>
 
-        {/* Deductions */}
         <Card>
-          <CardHeader style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <CardHeader className="employee-detail-card-header-flex">
             <CardTitle>Deductions</CardTitle>
             <Dialog open={deductionDialogOpen} onOpenChange={setDeductionDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" variant="outline" style={{ display: "flex", gap: "6px" }}>
+                <Button size="sm" variant="outline" className="employee-detail-action-btn">
                   <Plus size={14} /> Add Deduction
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader><DialogTitle>Add Deduction</DialogTitle></DialogHeader>
-                <form onSubmit={(e) => { e.preventDefault(); addDeduction.mutate(); }} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <form onSubmit={(e) => { e.preventDefault(); addDeduction.mutate(); }} className="employee-detail-form">
                   <div>
                     <Label>Deduction Type</Label>
                     <Select value={deductionForm.deduction_type_id} onValueChange={(v) => setDeductionForm({ ...deductionForm, deduction_type_id: v })}>
@@ -300,20 +281,20 @@ export default function EmployeeDetailPage() {
           </CardHeader>
           <CardContent>
             {deductions.length === 0 ? (
-              <p style={{ color: "gray", fontSize: "0.875rem" }}>No deductions active.</p>
+              <p className="employee-detail-empty">No deductions active.</p>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div className="employee-detail-list">
                 {deductions.map((d) => (
-                  <div key={d._id} style={{ display: "flex", justifyContent: "space-between", backgroundColor: "#f3f4f6", padding: "8px 12px", borderRadius: "8px" }}>
+                  <div key={d._id} className="employee-detail-list-item">
                     <div>
-                      <p style={{ fontWeight: "500" }}>{d.deduction_type?.name}</p>
-                      <p style={{ fontSize: "0.75rem", color: "gray" }}>
+                      <p className="employee-detail-item-name">{d.deduction_type?.name}</p>
+                      <p className="employee-detail-subtext">
                         {d.start_date} {d.end_date ? `→ ${d.end_date}` : "(ongoing)"}
                       </p>
                     </div>
-                    <div style={{ textAlign: "right" }}>
-                      <p style={{ fontWeight: "500" }}>{d.percentage}%</p>
-                      <span style={{ fontSize: "0.75rem", color: d.is_active ? "#166534" : "gray" }}>
+                    <div className="employee-detail-item-right">
+                      <p className="employee-detail-item-name">{d.percentage}%</p>
+                      <span className={`employee-detail-status-small ${d.is_active ? "active" : ""}`}>
                         {d.is_active ? "Active" : "Ended"}
                       </span>
                     </div>
@@ -328,18 +309,13 @@ export default function EmployeeDetailPage() {
   );
 }
 
-
 function Row({ label, value, negative, bold }) {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <span style={{ fontSize: "0.875rem", fontWeight: bold ? "600" : "normal", color: bold ? "inherit" : "gray" }}>
+    <div className="employee-detail-row">
+      <span className={`employee-detail-row-label ${bold ? "bold" : ""}`}>
         {label}
       </span>
-      <span style={{ 
-        fontSize: bold ? "1.125rem" : "0.875rem", 
-        fontWeight: bold ? "bold" : "500", 
-        color: negative ? "#dc2626" : "inherit" 
-      }}>
+      <span className={`employee-detail-row-value ${bold ? "bold" : ""} ${negative ? "negative" : ""}`}>
         {negative ? "−" : ""}${Math.abs(value).toLocaleString(undefined, { minimumFractionDigits: 2 })}
       </span>
     </div>
