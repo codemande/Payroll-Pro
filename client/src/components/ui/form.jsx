@@ -1,11 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
-import { cn } from "../../lib/utils";
 import { Label } from "./label";
+import "../../styles/form.css";
+
+function cn(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const Form = FormProvider;
 
@@ -49,7 +52,7 @@ const FormItem = React.forwardRef(({ className, ...props }, ref) => {
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("form-item", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -61,7 +64,7 @@ const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn("form-label", error && "is-error", className)}
       htmlFor={formItemId}
       {...props}
     />
@@ -95,7 +98,7 @@ const FormDescription = React.forwardRef(({ className, ...props }, ref) => {
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("form-description", className)}
       {...props}
     />
   );
@@ -114,7 +117,7 @@ const FormMessage = React.forwardRef(({ className, children, ...props }, ref) =>
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("form-message", className)}
       {...props}
     >
       {body}
