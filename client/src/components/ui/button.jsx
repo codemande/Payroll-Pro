@@ -8,7 +8,7 @@ function cn(...classes) {
 }
 
 const buttonVariants = ({ variant = "default", size = "default", className = "" } = {}) => {
-  return cn("btn", `btn-${variant}`, `btn-${size}`, className);
+  return cn("btn", `btn-${variant}`, `size-${size}`, className);
 };
 
 const Button = React.forwardRef(
