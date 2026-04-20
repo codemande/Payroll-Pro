@@ -5,7 +5,7 @@ import api from "../services/api";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { Card, CardContent } from "../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -68,7 +68,7 @@ export default function PositionsPage() {
     <div className="positions-page">
       <div className="positions-header">
         <div>
-          <h1 className="positions-title">Positions</h1>
+          <h1 className="positions-title font-display">Positions</h1>
           <p className="positions-subtitle">
             Manage employee roles and departments
           </p>
@@ -93,7 +93,7 @@ export default function PositionsPage() {
               }}
               className="positions-form"
             >
-              <div>
+              <div className="positions-form-group">
                 <Label>Title</Label>
                 <Input
                   value={form.title}
@@ -104,7 +104,7 @@ export default function PositionsPage() {
                 />
               </div>
 
-              <div>
+              <div className="positions-form-group">
                 <Label>Department</Label>
                 <Input
                   value={form.department}
@@ -115,7 +115,7 @@ export default function PositionsPage() {
                 />
               </div>
 
-              <Button type="submit" disabled={addPosition.isPending}>
+              <Button type="submit" className="positions-submit-btn" disabled={addPosition.isPending}>
                 Add Position
               </Button>
             </form>

@@ -1,91 +1,131 @@
 .positions-page {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: 0;
 }
 
 /* Header */
 .positions-header {
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* Title */
 .positions-title {
   font-size: 1.875rem;
-  font-weight: bold;
+  font-weight: 700;
+  color: var(--foreground);
 }
 
+/* Subtitle */
 .positions-subtitle {
   margin-top: 0.25rem;
-  color: #777;
+  color: var(--muted-foreground);
 }
 
+/* Button */
 .positions-add-btn {
   display: flex;
-  gap: 8px;
   align-items: center;
+  gap: 0.5rem;
+  background-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
 }
 
-/* Form */
+.positions-add-btn:hover {
+  background-color: hsla(var(--accent-hsl), 0.9) !important;
+}
+
+/* Form Layout */
 .positions-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+/* Form Group */
+.positions-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.positions-submit-btn {
+  width: 100%;
+  background-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+
 /* Empty State */
 .positions-empty-card {
-  border-style: dashed;
+  border-style: dashed !important;
 }
 
 .positions-empty-content {
   padding: 3rem 0;
   text-align: center;
-  color: #777;
+  color: var(--muted-foreground);
 }
 
 /* Grid */
 .positions-grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (min-width: 640px) {
+  .positions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .positions-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* Card */
 .positions-card {
+  border: 1px solid hsla(var(--border-hsl), 0.5) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
   transition: box-shadow 0.2s ease;
 }
 
 .positions-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
 .positions-card-content {
   padding: 1.25rem;
 }
 
+/* Title */
 .positions-card-title {
   font-size: 1.125rem;
   font-weight: 600;
+  color: var(--foreground);
 }
 
+/* Dept */
 .positions-card-department {
   margin-top: 0.25rem;
   font-size: 0.875rem;
-  color: #777;
+  color: var(--muted-foreground);
 }
 
+/* Footer */
 .positions-card-footer {
   margin-top: 0.75rem;
 }
 
 /* Badge */
 .positions-badge {
-  padding: 4px 12px;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
-  background-color: #e0e7ff;
-  color: #4f46e5;
+  background-color: hsla(var(--accent-hsl), 0.15);
+  color: var(--accent);
 }
