@@ -10,12 +10,12 @@
   font-family: inherit;
   font-size: 1.875rem;
   font-weight: 700;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
 }
 
 .dashboard-subtitle {
   margin-top: 0.25rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
 }
 
 .dashboard-stats-grid {
@@ -36,7 +36,7 @@
 }
 
 .dashboard-stat-card {
-  border-color: hsla(var(--border), 0.5);
+  border-color: var(--border), 0.5;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   transition: box-shadow 0.2s;
 }
@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  background-color: hsl(var(--muted));
+  background-color: var(--muted);
 }
 
 .dashboard-stat-icon {
@@ -70,18 +70,18 @@
 
 .dashboard-stat-label {
   font-size: 0.875rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
 }
 
 .dashboard-stat-value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
 }
 
 .dashboard-role-card {
   margin-top: 2rem;
-  border-color: hsla(var(--border), 0.5);
+  border-color: var(--border), 0.5;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
@@ -92,7 +92,7 @@
 
 .dashboard-empty-msg {
   font-size: 0.875rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
 }
 
 .dashboard-role-list {
@@ -106,32 +106,32 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 0.5rem;
-  background-color: hsla(var(--muted), 0.5);
+  background-color: var(--muted), 0.5;
   padding: 0.75rem 1rem;
 }
 
 .dashboard-role-title {
   font-weight: 500;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
 }
 
 .dashboard-role-dept {
   font-size: 0.75rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
 }
 
 .dashboard-role-badge {
   border-radius: 9999px;
-  background-color: hsla(var(--accent), 0.15);
+  background-color: var(--accent), 0.15;
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: hsl(var(--accent));
+  color: var(--accent);
 }
 
 .dashboard-tax-card {
   margin-top: 1.5rem;
-  border-color: hsla(var(--border), 0.5);
+  border-color: var(--border), 0.5;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
@@ -148,18 +148,56 @@
 
 .dashboard-tax-box {
   border-radius: 0.5rem;
-  background-color: hsla(var(--muted), 0.5);
+  background-color: var(--muted), 0.5;
   padding: 1rem;
 }
 
 .dashboard-tax-label {
   font-size: 0.875rem;
-  color: hsl(var(--muted-foreground));
+  color: var(--muted-foreground);
 }
 
 .dashboard-tax-value {
   margin-top: 0.25rem;
   font-size: 1.5rem;
   font-weight: 700;
-  color: hsl(var(--foreground));
+  color: var(--foreground);
+}
+
+/* Icon colors (Tailwind text-accent, text-success) */
+.icon-accent {
+  color: var(--accent);
+}
+
+.icon-success {
+  color: var(--success);
+}
+
+/* Opacity versions */
+.bg-muted-50 {
+  background-color: rgba(0, 0, 0, 0.03); /* fallback */
+}
+
+.dashboard-stat-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Better match Tailwind shadow */
+.dashboard-stat-card {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.dashboard-stat-card:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Role item background */
+.dashboard-role-item {
+  background-color: rgba(0,0,0,0.03);
+}
+
+/* Badge */
+.dashboard-role-badge {
+  background-color: rgba(255, 159, 28, 0.15);
+  color: var(--accent);
 }

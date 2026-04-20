@@ -54,24 +54,16 @@ export default function DashboardPage() {
   });
 
   const stats = [
-    { label: "Total Employees", value: employees.length, icon: Users },
-    { label: "Positions", value: positions.length, icon: Briefcase },
-    {
-      label: "Monthly Payroll",
-      value: `$${totalMonthly.toLocaleString()}`,
-      icon: DollarSign,
-    },
-    {
-      label: "Yearly Payroll (13mo)",
-      value: `$${totalYearly.toLocaleString()}`,
-      icon: TrendingUp,
-    },
+    { label: "Total Employees", value: employees.length, icon: Users, color: "accent" },
+    { label: "Positions", value: positions.length, icon: Briefcase, color: "success" },
+    { label: "Monthly Payroll", value: `$${totalMonthly.toLocaleString()}`, icon: DollarSign, color: "accent" },
+    { label: "Yearly Payroll (13mo)", value: `$${totalYearly.toLocaleString()}`, icon: TrendingUp, color: "success" },
   ];
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">Dashboard</h1>
+        <h1 className="dashboard-title font-display">Dashboard</h1>
         <p className="dashboard-subtitle">Payroll overview and workforce summary</p>
       </div>
 
@@ -80,9 +72,9 @@ export default function DashboardPage() {
           <Card key={stat.label} className="dashboard-stat-card">
             <CardContent className="dashboard-stat-content">
               <div className="dashboard-stat-icon-box">
-                <stat.icon className={`dashboard-stat-icon ${stat.color}`} />
+                <stat.icon className={`dashboard-stat-icon icon-${stat.color}`} />
               </div>
-              <div className="dashboard-stat-details">
+              <div>
                 <p className="dashboard-stat-label">{stat.label}</p>
                 <p className="dashboard-stat-value">{stat.value}</p>
               </div>
@@ -98,12 +90,14 @@ export default function DashboardPage() {
         </CardHeader>
         <CardContent>
           {Object.values(positionCounts).length === 0 ? (
-            <p className="dashboard-empty-msg">No employees yet. Add employees to see the breakdown.</p>
+            <p className="dashboard-empty-msg">
+              No employees yet. Add employees to see the breakdown.
+            </p>
           ) : (
             <div className="dashboard-role-list">
               {Object.values(positionCounts).map((pos) => (
                 <div key={pos.title} className="dashboard-role-item">
-                  <div className="dashboard-role-info">
+                  <div>
                     <p className="dashboard-role-title">{pos.title}</p>
                     <p className="dashboard-role-dept">{pos.department}</p>
                   </div>
@@ -126,11 +120,15 @@ export default function DashboardPage() {
           <div className="dashboard-tax-grid">
             <div className="dashboard-tax-box">
               <p className="dashboard-tax-label">Monthly Tax Obligations</p>
-              <p className="dashboard-tax-value">${totalTax.toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
+              <p className="dashboard-tax-value">
+                ${totalTax.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              </p>
             </div>
             <div className="dashboard-tax-box">
               <p className="dashboard-tax-label">Yearly Tax Obligations (13mo)</p>
-              <p className="dashboard-tax-value">${(totalTax * 13).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
+              <p className="dashboard-tax-value">
+                ${(totalTax * 13).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              </p>
             </div>
           </div>
         </CardContent>
