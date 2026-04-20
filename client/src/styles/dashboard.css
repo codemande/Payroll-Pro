@@ -1,23 +1,26 @@
 .dashboard-container {
-  padding: 1rem 0;
+  padding: 0;
 }
 
+/* Header */
 .dashboard-header {
   margin-bottom: 2rem;
 }
 
+/* Title */
 .dashboard-title {
-  font-family: inherit;
   font-size: 1.875rem;
   font-weight: 700;
   color: var(--foreground);
 }
 
+/* Subtitle */
 .dashboard-subtitle {
   margin-top: 0.25rem;
   color: var(--muted-foreground);
 }
 
+/* Stats Grid */
 .dashboard-stats-grid {
   display: grid;
   gap: 1.25rem;
@@ -35,20 +38,18 @@
   }
 }
 
-/* =========================
-   CARDS
-========================= */
-
+/* Cards */
 .dashboard-stat-card {
-  border: 1px solid hsla(var(--border-hsl), 0.5);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  transition: box-shadow 0.2s;
+  border: 1px solid hsla(var(--border-hsl), 0.5) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  transition: box-shadow 0.2s ease;
 }
 
 .dashboard-stat-card:hover {
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
+/* Content */
 .dashboard-stat-content {
   display: flex;
   align-items: center;
@@ -56,54 +57,58 @@
   padding: 1.25rem !important;
 }
 
+/* Icon Box */
 .dashboard-stat-icon-box {
   display: flex;
-  height: 3rem;
-  width: 3rem;
+  height: 3rem; 
+  width: 3rem; 
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  background-color: hsla(var(--muted-hsl), 1);
+  background-color: var(--muted);
 }
 
 .dashboard-stat-icon {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.5rem; 
+  width: 1.5rem; 
 }
 
+/* Label */
 .dashboard-stat-label {
   font-size: 0.875rem;
   color: var(--muted-foreground);
 }
 
+/* Value */
 .dashboard-stat-value {
-  font-size: 1.5rem;
+  font-size: 1.5rem; 
   font-weight: 700;
   color: var(--foreground);
 }
 
+/* Role Breakdown Card */
 .dashboard-role-card {
   margin-top: 2rem;
-  border-color: var(--border), 0.5;
+  border: 1px solid hsla(var(--border-hsl), 0.5) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
+/* Card Title */
 .dashboard-card-title {
   font-size: 1.125rem;
   font-weight: 600;
+  color: var(--foreground);
 }
 
-.dashboard-empty-msg {
-  font-size: 0.875rem;
-  color: var(--muted-foreground);
-}
-
+/* List */
 .dashboard-role-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
+/* Role Item */
 .dashboard-role-item {
   display: flex;
   align-items: center;
@@ -123,6 +128,7 @@
   color: var(--muted-foreground);
 }
 
+/* Badge */
 .dashboard-role-badge {
   border-radius: 9999px;
   background-color: hsla(var(--accent-hsl), 0.15);
@@ -132,17 +138,14 @@
   color: var(--accent);
 }
 
+/* Tax Summary Card */
 .dashboard-tax-card {
   margin-top: 1.5rem;
-  border-color: var(--border), 0.5;
+  border: 1px solid hsla(var(--border-hsl), 0.5) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
 }
 
-.dashboard-role-card,
-.dashboard-tax-card {
-  border: 1px solid hsla(var(--border-hsl), 0.5);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
+/* Grid: */
 .dashboard-tax-grid {
   display: grid;
   gap: 1rem;
@@ -154,9 +157,10 @@
   }
 }
 
+/* Box */
 .dashboard-tax-box {
   border-radius: 0.5rem;
-  background-color: hsla(var(--muted), 0.5);
+  background-color: hsla(var(--muted-hsl), 0.5);
   padding: 1rem;
 }
 
@@ -165,47 +169,24 @@
   color: var(--muted-foreground);
 }
 
+/* Value */
 .dashboard-tax-value {
   margin-top: 0.25rem;
-  font-size: 1.5rem;
+  font-size: 1.5rem; 
   font-weight: 700;
   color: var(--foreground);
 }
 
-/* Icon colors (Tailwind text-accent, text-success) */
+/* Icon colors */
 .icon-accent {
   color: var(--accent);
 }
 
 .icon-success {
-  color: var(--success);
+  color: hsl(var(--success-hsl));
 }
 
-/* Opacity versions */
-.bg-muted-50 {
-  background-color: rgba(0, 0, 0, 0.03); /* fallback */
-}
-
-.dashboard-stat-card {
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Better match Tailwind shadow */
-.dashboard-stat-card {
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.dashboard-stat-card:hover {
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-}
-
-/* Role item background */
-.dashboard-role-item {
-  background-color: rgba(0,0,0,0.03);
-}
-
-/* Badge */
-.dashboard-role-badge {
-  background-color: hsla(var(--accent), 0.15);
-  color: hsl(var(--accent));
+.dashboard-empty-msg {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
 }

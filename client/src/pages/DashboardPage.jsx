@@ -11,7 +11,8 @@ export default function DashboardPage() {
     queryKey: ["employees"],
     queryFn: async () => {
       const res = await api.get("/employees");
-      return res.data;
+      // Original logic filtered by is_active at the source
+      return res.data.filter(e => e.is_active !== false);
     },
   });
 
