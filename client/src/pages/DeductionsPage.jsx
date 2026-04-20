@@ -5,7 +5,7 @@ import api from "../services/api";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { Card, CardContent } from "../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -55,18 +55,18 @@ export default function DeductionsPage() {
   });
 
   return (
-    <div className="deductions-page">
+    <div className="deductions-container">
       <div className="deductions-header">
         <div>
-          <h1 className="page-title">Deduction Types</h1>
-          <p className="page-subtitle">
+          <h1 className="deductions-title font-display">Deduction Types</h1>
+          <p className="deductions-subtitle">
             Manage housing, pension, insurance and other deductions
           </p>
         </div>
 
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="add-btn">
+            <Button className="deductions-add-btn">
               <Plus size={16} /> Add Deduction Type
             </Button>
           </DialogTrigger>
@@ -81,9 +81,9 @@ export default function DeductionsPage() {
                 e.preventDefault();
                 addType.mutate();
               }}
-              className="form"
+              className="deductions-form"
             >
-              <div>
+              <div className="deductions-form-item">
                 <Label>Name</Label>
                 <Input
                   value={form.name}
@@ -95,7 +95,7 @@ export default function DeductionsPage() {
                 />
               </div>
 
-              <div>
+              <div className="deductions-form-item">
                 <Label>Description</Label>
                 <Textarea
                   value={form.description}
@@ -106,7 +106,7 @@ export default function DeductionsPage() {
                 />
               </div>
 
-              <div>
+              <div className="deductions-form-item">
                 <Label>Default Percentage (%)</Label>
                 <Input
                   type="number"
@@ -122,7 +122,7 @@ export default function DeductionsPage() {
                 />
               </div>
 
-              <Button type="submit" disabled={addType.isPending}>
+              <Button type="submit" className="deductions-submit-btn" disabled={addType.isPending}>
                 Add Deduction Type
               </Button>
             </form>
@@ -131,17 +131,17 @@ export default function DeductionsPage() {
       </div>
 
       {deductionTypes.length === 0 ? (
-        <Card className="empty-card">
-          <CardContent className="empty-content">
+        <Card className="deductions-empty-card">
+          <CardContent className="deductions-empty-content">
             No deduction types yet. Add types like Housing, Pension, or Insurance.
           </CardContent>
         </Card>
       ) : (
-        <div className="grid">
+        <div className="deductions-grid">
           {deductionTypes.map((dt) => (
             <Card key={dt._id} className="deduction-card">
-              <CardContent className="card-content">
-                <div className="card-top">
+              <CardContent className="deduction-card-content">
+                <div className="deduction-card-top">
                   <div>
                     <h3 className="deduction-name">{dt.name}</h3>
                     {dt.description && (
@@ -150,7 +150,7 @@ export default function DeductionsPage() {
                   </div>
 
                   <span
-                    className={`status ${
+                    className={`deduction-status-badge ${
                       dt.is_active !== false ? "active" : "inactive"
                     }`}
                   >
@@ -158,9 +158,9 @@ export default function DeductionsPage() {
                   </span>
                 </div>
 
-                <div className="rate-box">
-                  <p className="rate-label">Default Rate</p>
-                  <p className="rate-value">{dt.default_percentage}%</p>
+                <div className="deduction-rate-box">
+                  <p className="deduction-rate-label">Default Rate</p>
+                  <p className="deduction-rate-value">{dt.default_percentage}%</p>
                 </div>
               </CardContent>
             </Card>
