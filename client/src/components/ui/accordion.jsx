@@ -3,7 +3,6 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 import "../../styles/accordion.css";
 
-// simple class join helper (replaces cn())
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -17,7 +16,6 @@ const AccordionItem = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ));
-
 AccordionItem.displayName = "AccordionItem";
 
 const AccordionTrigger = React.forwardRef(
@@ -34,7 +32,6 @@ const AccordionTrigger = React.forwardRef(
     </AccordionPrimitive.Header>
   )
 );
-
 AccordionTrigger.displayName = "AccordionTrigger";
 
 const AccordionContent = React.forwardRef(
@@ -50,7 +47,6 @@ const AccordionContent = React.forwardRef(
     </AccordionPrimitive.Content>
   )
 );
-
 AccordionContent.displayName = "AccordionContent";
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
