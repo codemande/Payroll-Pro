@@ -1,28 +1,39 @@
+/* Container */
 .notfound-container {
   display: flex;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: #f3f4f6;
+  background-color: var(--muted);
 }
 
+/* Content */
 .notfound-content {
   text-align: center;
 }
 
+/* Title */
 .notfound-title {
   margin-bottom: 1rem;
-  font-size: 2.25rem;
-  font-weight: bold;
+  font-size: 2.25rem; 
+  font-weight: 700;
+  color: var(--foreground);
 }
 
+/* Text */
 .notfound-text {
   margin-bottom: 1rem;
-  font-size: 1.25rem;
-  color: #777;
+  font-size: 1.25rem; /* text-xl */
+  color: var(--muted-foreground);
 }
 
+/* Link */
 .notfound-link {
-  color: #2563eb;
+  color: var(--primary);
   text-decoration: underline;
+  transition: opacity 0.2s;
+}
+
+.notfound-link:hover {
+  opacity: 0.9;
 }
