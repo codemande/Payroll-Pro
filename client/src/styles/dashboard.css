@@ -35,14 +35,18 @@
   }
 }
 
+/* =========================
+   CARDS
+========================= */
+
 .dashboard-stat-card {
-  border-color: var(--border), 0.5;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border: 1px solid hsla(var(--border-hsl), 0.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   transition: box-shadow 0.2s;
 }
 
 .dashboard-stat-card:hover {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .dashboard-stat-content {
@@ -60,7 +64,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  background-color: var(--muted);
+  background-color: hsla(var(--muted-hsl), 1);
 }
 
 .dashboard-stat-icon {
@@ -82,7 +86,6 @@
 .dashboard-role-card {
   margin-top: 2rem;
   border-color: var(--border), 0.5;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .dashboard-card-title {
@@ -106,7 +109,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 0.5rem;
-  background-color: var(--muted), 0.5;
+  background-color: hsla(var(--muted-hsl), 0.5);
   padding: 0.75rem 1rem;
 }
 
@@ -122,7 +125,7 @@
 
 .dashboard-role-badge {
   border-radius: 9999px;
-  background-color: var(--accent), 0.15;
+  background-color: hsla(var(--accent-hsl), 0.15);
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -132,7 +135,12 @@
 .dashboard-tax-card {
   margin-top: 1.5rem;
   border-color: var(--border), 0.5;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.dashboard-role-card,
+.dashboard-tax-card {
+  border: 1px solid hsla(var(--border-hsl), 0.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .dashboard-tax-grid {
@@ -148,7 +156,7 @@
 
 .dashboard-tax-box {
   border-radius: 0.5rem;
-  background-color: var(--muted), 0.5;
+  background-color: hsla(var(--muted), 0.5);
   padding: 1rem;
 }
 
@@ -198,6 +206,6 @@
 
 /* Badge */
 .dashboard-role-badge {
-  background-color: rgba(255, 159, 28, 0.15);
-  color: var(--accent);
+  background-color: hsla(var(--accent), 0.15);
+  color: hsl(var(--accent));
 }
