@@ -16,13 +16,13 @@ const Command = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ));
-Command.displayName = CommandPrimitive.displayName;
+Command.displayName = "Command";
 
 const CommandDialog = ({ children, ...props }) => {
   return (
     <Dialog {...props}>
       <DialogContent className="command-dialog-content">
-        <Command className="command-dialog">
+        <Command className="command-dialog-wrapper">
           {children}
         </Command>
       </DialogContent>
@@ -32,7 +32,7 @@ const CommandDialog = ({ children, ...props }) => {
 
 const CommandInput = React.forwardRef(({ className, ...props }, ref) => (
   <div className="command-input-wrapper" cmdk-input-wrapper="">
-    <Search className="command-input-icon" />
+    <Search className="command-input-icon" size={16} />
     <CommandPrimitive.Input
       ref={ref}
       className={cn("command-input", className)}
@@ -40,7 +40,7 @@ const CommandInput = React.forwardRef(({ className, ...props }, ref) => (
     />
   </div>
 ));
-CommandInput.displayName = CommandPrimitive.Input.displayName;
+CommandInput.displayName = "CommandInput";
 
 const CommandList = React.forwardRef(({ className, ...props }, ref) => (
   <CommandPrimitive.List
@@ -49,12 +49,12 @@ const CommandList = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ));
-CommandList.displayName = CommandPrimitive.List.displayName;
+CommandList.displayName = "CommandList";
 
 const CommandEmpty = React.forwardRef((props, ref) => (
   <CommandPrimitive.Empty ref={ref} className="command-empty" {...props} />
 ));
-CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
+CommandEmpty.displayName = "CommandEmpty";
 
 const CommandGroup = React.forwardRef(({ className, ...props }, ref) => (
   <CommandPrimitive.Group
@@ -63,12 +63,16 @@ const CommandGroup = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ));
-CommandGroup.displayName = CommandPrimitive.Group.displayName;
+CommandGroup.displayName = "CommandGroup";
 
 const CommandSeparator = React.forwardRef(({ className, ...props }, ref) => (
-  <CommandPrimitive.Separator ref={ref} className={cn("command-separator", className)} {...props} />
+  <CommandPrimitive.Separator 
+    ref={ref} 
+    className={cn("command-separator", className)} 
+    {...props} 
+  />
 ));
-CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
+CommandSeparator.displayName = "CommandSeparator";
 
 const CommandItem = React.forwardRef(({ className, ...props }, ref) => (
   <CommandPrimitive.Item
@@ -77,7 +81,7 @@ const CommandItem = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ));
-CommandItem.displayName = CommandPrimitive.Item.displayName;
+CommandItem.displayName = "CommandItem";
 
 const CommandShortcut = ({ className, ...props }) => {
   return <span className={cn("command-shortcut", className)} {...props} />;
