@@ -1,25 +1,28 @@
+/* Avatar Root */
 .avatar {
   position: relative;
   display: flex;
-  height: 2.5rem;
-  width: 2.5rem;
-  flex-shrink: 0;
+  height: 2.5rem; 
+  width: 2.5rem;  
+  flex-shrink: 0; 
   overflow: hidden;
   border-radius: 9999px;
 }
 
+/* Avatar Image */
 .avatar-image {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; 
   height: 100%;
   width: 100%;
 }
 
+/* Avatar Fallback */
 .avatar-fallback {
   display: flex;
   height: 100%;
   width: 100%;
-  align-items: center;
-  justify-content: center;
+  align-items: center; 
+  justify-content: center; 
   border-radius: 9999px;
-  background-color: var(--muted);
+  background-color: var(--muted); 
 }
