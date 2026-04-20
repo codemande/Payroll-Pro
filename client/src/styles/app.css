@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  color: hsl(var(--muted-foreground));
 }
 
 .access-denied {
@@ -13,13 +14,15 @@
   height: 100vh;
   text-align: center;
   gap: 10px;
+  color: hsl(var(--foreground));
 }
 
 .access-denied h2 {
   font-size: 20px;
   font-weight: 600;
+  color: hsl(var(--foreground));
 }
 
 .access-denied p {
-  color: #777;
+  color: hsl(var(--muted-foreground));
 }
