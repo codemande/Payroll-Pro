@@ -38,6 +38,7 @@
   --radius: 0.5rem;
 
   --success: hsl(152 60% 40%);
+  --success-hsl: 152, 60%, 40%;
   --success-foreground: hsl(0 0% 100%);
   --warning: hsl(38 92% 50%);
   --warning-foreground: hsl(38 90% 10%);
@@ -98,6 +99,8 @@
   --sidebar-border: hsl(220 30% 14%);
   --sidebar-ring: hsl(38 90% 55%);
   --sidebar-muted: hsl(220 15% 45%);
+
+  --success-hsl: 152, 60%, 40%;
 }
 
 /* =========================
