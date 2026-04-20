@@ -13,11 +13,9 @@ const ChartContext = React.createContext(null);
 
 function useChart() {
   const context = React.useContext(ChartContext);
-
   if (!context) {
     throw new Error("useChart must be used within a <ChartContainer />");
   }
-
   return context;
 }
 
@@ -44,9 +42,7 @@ ChartContainer.displayName = "Chart";
 const ChartStyle = ({ id, config }) => {
   const colorConfig = Object.entries(config).filter(([, itemConfig]) => itemConfig.theme || itemConfig.color);
 
-  if (!colorConfig.length) {
-    return null;
-  }
+  if (!colorConfig.length) return null;
 
   return (
     <style
@@ -94,9 +90,7 @@ const ChartTooltipContent = React.forwardRef(
     const { config } = useChart();
 
     const tooltipLabel = React.useMemo(() => {
-      if (hideLabel || !payload?.length) {
-        return null;
-      }
+      if (hideLabel || !payload?.length) return null;
 
       const [item] = payload;
       const key = `${labelKey || item.dataKey || item.name || "value"}`;
@@ -107,27 +101,20 @@ const ChartTooltipContent = React.forwardRef(
           : itemConfig?.label;
 
       if (labelFormatter) {
-        return <div className={cn("chart-tooltip-label-content", labelClassName)}>{labelFormatter(value, payload)}</div>;
+        return <div className={cn("chart-tooltip-label", labelClassName)}>{labelFormatter(value, payload)}</div>;
       }
 
-      if (!value) {
-        return null;
-      }
+      if (!value) return null;
 
-      return <div className={cn("chart-tooltip-label-content", labelClassName)}>{value}</div>;
+      return <div className={cn("chart-tooltip-label", labelClassName)}>{value}</div>;
     }, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
 
-    if (!active || !payload?.length) {
-      return null;
-    }
+    if (!active || !payload?.length) return null;
 
     const nestLabel = payload.length === 1 && indicator !== "dot";
 
     return (
-      <div
-        ref={ref}
-        className={cn("chart-tooltip-root", className)}
-      >
+      <div ref={ref} className={cn("chart-tooltip-root", className)}>
         {!nestLabel ? tooltipLabel : null}
         <div className="chart-tooltip-grid">
           {payload.map((item, index) => {
@@ -167,16 +154,16 @@ const ChartTooltipContent = React.forwardRef(
                     )}
                     <div
                       className={cn(
-                        "chart-tooltip-item-details",
-                        nestLabel ? "is-nested-details" : "is-centered-details"
+                        "chart-tooltip-details",
+                        nestLabel ? "is-nested" : "is-centered"
                       )}
                     >
-                      <div className="chart-tooltip-item-label-group">
+                      <div className="chart-tooltip-label-group">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="chart-tooltip-item-label">{itemConfig?.label || item.name}</span>
+                        <span className="chart-tooltip-label-text">{itemConfig?.label || item.name}</span>
                       </div>
                       {item.value && (
-                        <span className="chart-tooltip-item-value">
+                        <span className="chart-tooltip-value">
                           {item.value.toLocaleString()}
                         </span>
                       )}
@@ -198,10 +185,7 @@ const ChartLegend = RechartsPrimitive.Legend;
 const ChartLegendContent = React.forwardRef(
   ({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
     const { config } = useChart();
-
-    if (!payload?.length) {
-      return null;
-    }
+    if (!payload?.length) return null;
 
     return (
       <div
@@ -217,18 +201,13 @@ const ChartLegendContent = React.forwardRef(
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
           return (
-            <div
-              key={item.value}
-              className="chart-legend-item"
-            >
+            <div key={item.value} className="chart-legend-item">
               {itemConfig?.icon && !hideIcon ? (
                 <itemConfig.icon />
               ) : (
                 <div
                   className="chart-legend-indicator"
-                  style={{
-                    backgroundColor: item.color,
-                  }}
+                  style={{ backgroundColor: item.color }}
                 />
               )}
               {itemConfig?.label}
@@ -242,27 +221,18 @@ const ChartLegendContent = React.forwardRef(
 ChartLegendContent.displayName = "ChartLegend";
 
 function getPayloadConfigFromPayload(config, payload, key) {
-  if (typeof payload !== "object" || payload === null) {
-    return undefined;
-  }
-
+  if (typeof payload !== "object" || payload === null) return undefined;
   const payloadPayload =
     "payload" in payload && typeof payload.payload === "object" && payload.payload !== null
       ? payload.payload
       : undefined;
 
   let configLabelKey = key;
-
   if (key in payload && typeof payload[key] === "string") {
     configLabelKey = payload[key];
-  } else if (
-    payloadPayload &&
-    key in payloadPayload &&
-    typeof payloadPayload[key] === "string"
-  ) {
+  } else if (payloadPayload && key in payloadPayload && typeof payloadPayload[key] === "string") {
     configLabelKey = payloadPayload[key];
   }
-
   return configLabelKey in config ? config[configLabelKey] : config[key];
 }
 
