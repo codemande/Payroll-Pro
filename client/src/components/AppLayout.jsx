@@ -26,67 +26,61 @@ export default function AppLayout({ children }) {
 
   return (
     <div className="layout-container">
-
       {/* Sidebar */}
       <aside className="sidebar">
-
-        {/* Logo */}
+        {/* Logo Section */}
         <div className="sidebar-header">
           <div className="sidebar-logo-box">
-            <Receipt className="sidebar-logo-icon" />
+            <Receipt className="sidebar-logo-icon" size={16} />
           </div>
-
-          <span className="sidebar-logo-text">
+          <span className="sidebar-logo-text font-display">
             PayrollPro
           </span>
         </div>
 
-        {/* Navigation */}
+        {/* Navigation Section */}
         <nav className="sidebar-nav">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
-
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`sidebar-nav-link ${isActive ? "active" : ""}`}
+                className={`sidebar-nav-link ${isActive ? "active" : "inactive"}`}
               >
-                <item.icon className="sidebar-nav-icon" />
+                <item.icon className="sidebar-nav-icon" size={16} />
                 {item.label}
-
                 {isActive && (
-                  <ChevronRight className="sidebar-nav-chevron" />
+                  <ChevronRight className="sidebar-nav-chevron" size={16} />
                 )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Footer (user + logout) */}
+        {/* Footer Section */}
         <div className="sidebar-footer">
-          <div className="sidebar-user-info">
+          <div className="sidebar-user-email">
             {user?.email}
           </div>
-
           <Button
+            variant="ghost"
+            size="sm"
             onClick={signOut}
             className="sidebar-logout-btn"
           >
-            <LogOut className="sidebar-logout-icon" />
+            <LogOut className="sidebar-logout-icon" size={16} />
             Sign Out
           </Button>
         </div>
-
       </aside>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <main className="main-content">
-        <div className="main-content-inner">
+        <div className="main-content-inner animate-fade-in">
           {children}
         </div>
       </main>
-
     </div>
   );
 }
