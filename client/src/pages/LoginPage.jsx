@@ -21,7 +21,6 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError("");
     setLoading(true);
 
@@ -38,15 +37,13 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="login-container">
+      <div className="login-container animate-fade-in">
         {/* Header */}
         <div className="login-header">
           <div className="login-logo">
-            <Lock className="login-logo-icon" />
+            <Lock className="login-logo-icon" size={28} />
           </div>
-
-          <h1 className="login-title">PayrollPro</h1>
-
+          <h1 className="login-title font-display">PayrollPro</h1>
           <p className="login-subtitle">
             Admin Payroll Management System
           </p>
@@ -62,10 +59,9 @@ export default function LoginPage() {
 
           <CardContent>
             <form onSubmit={handleSubmit} className="login-form">
-
               {error && (
                 <div className="login-error">
-                  <AlertCircle className="login-error-icon" />
+                  <AlertCircle className="login-error-icon" size={16} />
                   {error}
                 </div>
               )}
@@ -73,10 +69,8 @@ export default function LoginPage() {
               {/* Email */}
               <div className="login-field">
                 <Label htmlFor="email">Email</Label>
-
                 <div className="login-input-wrapper">
-                  <Mail className="login-input-icon" />
-
+                  <Mail className="login-input-icon" size={16} />
                   <Input
                     id="email"
                     type="email"
@@ -92,10 +86,8 @@ export default function LoginPage() {
               {/* Password */}
               <div className="login-field">
                 <Label htmlFor="password">Password</Label>
-
                 <div className="login-input-wrapper">
-                  <Lock className="login-input-icon" />
-
+                  <Lock className="login-input-icon" size={16} />
                   <Input
                     id="password"
                     type="password"
@@ -115,7 +107,6 @@ export default function LoginPage() {
               >
                 {loading ? "Signing in..." : "Sign In"}
               </Button>
-
             </form>
           </CardContent>
         </Card>
