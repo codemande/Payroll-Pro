@@ -14,7 +14,7 @@
   flex: 1;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0; /* py-4 */
+  padding: 1rem 0; 
   font-weight: 500;
   background: none;
   border: none;
@@ -44,7 +44,7 @@
 /* Content */
 .accordion-content {
   overflow: hidden;
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem; 
   transition: all 0.2s;
 }
 
