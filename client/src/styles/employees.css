@@ -1,67 +1,198 @@
-.employees-page {
+.employees-container {
+  padding: 0;
+}
+
+/* Header */
+.employees-header {
+  margin-bottom: 1.5rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
 }
 
+/* Title */
 .employees-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--foreground);
 }
 
-/* Form */
-.employees-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+/* Subtitle */
+.employees-subtitle {
+  margin-top: 0.25rem;
+  color: var(--muted-foreground);
 }
 
-.employees-input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
+/* Add Button*/
 .employees-add-btn {
-  padding: 8px 12px;
-  background: var(--accent);
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Search */
-.employees-search {
-  max-width: 300px;
-}
-
-/* Table */
-.employees-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.employees-table th,
-.employees-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-.employees-table th {
-  background: #f9fafb;
-}
-
-/* Button */
-.employees-view-btn {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
+  background-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+
+.employees-add-btn:hover {
+  background-color: hsla(var(--accent-hsl), 0.9) !important;
+}
+
+/* Dialog spacing */
+.employees-dialog {
+  max-width: 32rem;
+}
+
+/* Form Grid */
+.employees-form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .employees-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.employees-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem; 
+}
+
+.employees-submit-btn {
+  width: 100%;
+  background-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+
+/* Search Wrapper */
+.employees-search-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+  max-width: 28rem;
+}
+
+.employees-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted-foreground);
+}
+
+.employees-search-input {
+  padding-left: 2.5rem !important; 
 }
 
 /* Loading */
 .employees-loading {
-  color: #777;
+  color: var(--muted-foreground);
 }
+
+/* Empty State */
+.employees-empty-card {
+  border-style: dashed !important;
+}
+
+.employees-empty-content {
+  padding: 3rem 0; 
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+/* Table Container */
+.employees-table-container {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.employees-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem; /* text-sm */
+}
+
+/* Table Header Row */
+.employees-table-header-row {
+  border-bottom: 1px solid var(--border);
+  background-color: hsla(var(--muted-hsl), 0.5);
+}
+
+/* Th */
+.employees-th {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+/* Table Row */
+.employees-table-row {
+  border-bottom: 1px solid hsla(var(--border-hsl), 0.5);
+  transition: background-color 0.2s;
+}
+
+.employees-table-row:hover {
+  background-color: hsla(var(--muted-hsl), 0.3);
+}
+
+/* Td */
+.employees-td {
+  padding: 0.75rem 1rem;
+}
+
+.employees-name-text {
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.employees-number-text {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.employees-muted-text {
+  color: var(--muted-foreground);
+}
+
+/* Status badge */
+.employees-status-badge {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.employees-status-badge.active {
+  background-color: hsla(var(--success-hsl), 0.15);
+  color: hsl(var(--success-hsl));
+}
+
+.employees-status-badge.inactive {
+  background-color: hsla(var(--destructive-hsl), 0.15);
+  color: var(--destructive);
+}
+
+/* View Button */
+.employees-view-btn {
+  gap: 0.375rem;
+  color: var(--muted-foreground) !important;
+}
+
+.employees-view-btn:hover {
+  color: var(--foreground) !important;
+}
+
+/* Alignment Utilities */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.font-medium { font-weight: 500; }
