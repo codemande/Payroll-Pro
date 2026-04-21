@@ -1,101 +1,222 @@
-.employee-page {
-  padding: 20px;
+.employee-detail-page {
+  padding: 0; 
 }
 
-/* Back button */
-.back-btn {
+.employee-detail-loading {
+  color: var(--muted-foreground);
+}
+
+.employee-detail-back-btn {
   margin-bottom: 1rem;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground) !important;
 }
 
-/* Header */
-.employee-header {
+.employee-detail-header {
   margin-bottom: 1.5rem;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.employee-name {
+.employee-detail-name {
   font-size: 1.875rem;
-  font-weight: bold;
+  font-weight: 700;
+  color: var(--foreground);
 }
 
-.employee-meta {
+.employee-detail-info {
   margin-top: 0.25rem;
-  color: gray;
+  color: var(--muted-foreground);
 }
 
-/* Status badge */
-.status-badge {
-  padding: 4px 12px;
+.employee-detail-status {
   border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-}
-
-.status-badge.active {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.status-badge.inactive {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-/* Grid */
-.grid-2 {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-/* spacing inside cards */
-.space-y > * + * {
-  margin-top: 12px;
-}
-
-/* divider */
-.divider {
-  border-top: 1px solid #e5e7eb;
-  padding-top: 12px;
-}
-
-/* row component */
-.row {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
 }
 
-.label {
-  font-size: 0.875rem;
-  color: gray;
+.employee-detail-status.active {
+  background-color: hsla(var(--success-hsl), 0.15);
+  color: hsl(var(--success-hsl));
 }
 
-.label.bold {
+.employee-detail-status.inactive {
+  background-color: hsla(var(--destructive-hsl), 0.15);
+  color: var(--destructive);
+}
+
+.employee-detail-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .employee-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.employee-detail-grid.management {
+  margin-top: 1.5rem;
+}
+
+.employee-detail-card-border {
+  border: 1px solid hsla(var(--border-hsl), 0.5) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.employee-detail-card-header-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.employee-detail-card-title {
+  font-size: 1rem; 
+}
+
+.employee-detail-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.employee-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.employee-detail-row-label {
+  font-size: 0.875rem; 
+}
+
+.employee-detail-row-label.muted {
+  color: var(--muted-foreground);
+}
+
+.employee-detail-row-label.bold {
   font-weight: 600;
-  color: inherit;
+  color: var(--foreground);
 }
 
-.value {
-  font-size: 0.875rem;
+.employee-detail-row-value {
+  font-size: 0.875rem; 
+}
+
+.employee-detail-row-value.medium {
   font-weight: 500;
 }
 
-.value.big {
+.employee-detail-row-value.primary {
+  color: var(--foreground);
+}
+
+.employee-detail-row-value.negative {
+  color: var(--destructive);
+}
+
+.employee-detail-row-value.bold {
+  color: var(--foreground);
+  font-size: 1.125rem; 
+  font-weight: 700;
+}
+
+.employee-detail-net-wrapper {
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.employee-detail-action-btn {
+  gap: 0.375rem;
+}
+
+.employee-detail-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.employee-detail-form-spacing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.employee-detail-submit-btn {
+  width: 100%;
+  background-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+
+.employee-detail-submit-btn:hover {
+  background-color: hsla(var(--accent-hsl), 0.9) !important;
+}
+
+.employee-detail-current-salary {
   font-size: 1.125rem;
-  font-weight: bold;
+  font-weight: 600;
+  color: var(--foreground);
 }
 
-.value.negative {
-  color: #dc2626;
+.employee-detail-empty {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
 }
 
-/* loading */
-.loading-text {
-  color: gray;
+.employee-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.employee-detail-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  background-color: hsla(var(--muted-hsl), 0.5);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.employee-detail-list-main {
+  color: var(--foreground);
+}
+
+.employee-detail-subtext {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.employee-detail-item-name {
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.employee-detail-item-right {
+  text-align: right;
+}
+
+.employee-detail-status-small {
+  font-size: 0.75rem;
+}
+
+.employee-detail-status-small.active {
+  color: hsl(var(--success-hsl));
+}
+
+.employee-detail-status-small.ended {
+  color: var(--muted-foreground);
 }

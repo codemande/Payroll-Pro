@@ -142,7 +142,7 @@ export default function EmployeeDetailPage() {
 
       <div className="employee-detail-header">
         <div>
-          <h1 className="employee-detail-name">
+          <h1 className="employee-detail-name font-display">
             {employee.first_name} {employee.last_name}
           </h1>
           <p className="employee-detail-info">
@@ -155,9 +155,9 @@ export default function EmployeeDetailPage() {
       </div>
 
       <div className="employee-detail-grid">
-        <Card>
-          <CardHeader>
-            <CardTitle>Monthly Breakdown</CardTitle>
+        <Card className="employee-detail-card-border">
+          <CardHeader className="employee-detail-card-header-flex">
+            <CardTitle className="employee-detail-card-title">Monthly Breakdown</CardTitle>
           </CardHeader>
           <CardContent className="employee-detail-card-content">
             <Row label="Gross Salary" value={monthlySalary} />
@@ -171,9 +171,9 @@ export default function EmployeeDetailPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="employee-detail-card-border">
           <CardHeader>
-            <CardTitle>Yearly Breakdown (13 Months)</CardTitle>
+            <CardTitle className="employee-detail-card-title">Yearly Breakdown (13 Months)</CardTitle>
           </CardHeader>
           <CardContent className="employee-detail-card-content">
             <Row label="Gross Salary" value={yearlySalary} />
@@ -187,9 +187,10 @@ export default function EmployeeDetailPage() {
       </div>
 
       <div className="employee-detail-grid management">
-        <Card>
+        {/* Change salary */}
+        <Card className="employee-detail-card-border">
           <CardHeader className="employee-detail-card-header-flex">
-            <CardTitle>Salary History</CardTitle>
+            <CardTitle className="employee-detail-card-title">Salary History</CardTitle>
             <Dialog open={salaryDialogOpen} onOpenChange={setSalaryDialogOpen}>
               <DialogTrigger asChild>
                 <Button size="sm" variant="outline" className="employee-detail-action-btn">
@@ -203,15 +204,15 @@ export default function EmployeeDetailPage() {
                     <Label>Current Salary</Label>
                     <p className="employee-detail-current-salary">${monthlySalary.toLocaleString()}</p>
                   </div>
-                  <div>
+                  <div className="employee-detail-form-spacing">
                     <Label>New Monthly Salary</Label>
                     <Input type="number" step="0.01" value={newSalary} onChange={(e) => setNewSalary(e.target.value)} required />
                   </div>
-                  <div>
+                  <div className="employee-detail-form-spacing">
                     <Label>Reason (optional)</Label>
                     <Input value={salaryReason} onChange={(e) => setSalaryReason(e.target.value)} />
                   </div>
-                  <Button type="submit" disabled={changeSalary.isPending}>
+                  <Button type="submit" className="employee-detail-submit-btn" disabled={changeSalary.isPending}>
                     Update Salary
                   </Button>
                 </form>
@@ -226,7 +227,7 @@ export default function EmployeeDetailPage() {
                 {salaryHistory.map((h) => (
                   <div key={h._id} className="employee-detail-list-item">
                     <div>
-                      <p>${Number(h.previous_salary).toLocaleString()} → ${Number(h.new_salary).toLocaleString()}</p>
+                      <p className="employee-detail-list-main">${Number(h.previous_salary).toLocaleString()} → ${Number(h.new_salary).toLocaleString()}</p>
                       <p className="employee-detail-subtext">{h.reason || "No reason"}</p>
                     </div>
                     <span className="employee-detail-subtext">{new Date(h.effective_date).toLocaleDateString()}</span>
@@ -237,9 +238,10 @@ export default function EmployeeDetailPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        {/* Deductions */}
+        <Card className="employee-detail-card-border">
           <CardHeader className="employee-detail-card-header-flex">
-            <CardTitle>Deductions</CardTitle>
+            <CardTitle className="employee-detail-card-title">Deductions</CardTitle>
             <Dialog open={deductionDialogOpen} onOpenChange={setDeductionDialogOpen}>
               <DialogTrigger asChild>
                 <Button size="sm" variant="outline" className="employee-detail-action-btn">
@@ -249,7 +251,7 @@ export default function EmployeeDetailPage() {
               <DialogContent>
                 <DialogHeader><DialogTitle>Add Deduction</DialogTitle></DialogHeader>
                 <form onSubmit={(e) => { e.preventDefault(); addDeduction.mutate(); }} className="employee-detail-form">
-                  <div>
+                  <div className="employee-detail-form-spacing">
                     <Label>Deduction Type</Label>
                     <Select value={deductionForm.deduction_type_id} onValueChange={(v) => setDeductionForm({ ...deductionForm, deduction_type_id: v })}>
                       <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
@@ -260,19 +262,19 @@ export default function EmployeeDetailPage() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div>
+                  <div className="employee-detail-form-spacing">
                     <Label>Percentage (%)</Label>
                     <Input type="number" step="0.01" value={deductionForm.percentage} onChange={(e) => setDeductionForm({ ...deductionForm, percentage: e.target.value })} required />
                   </div>
-                  <div>
+                  <div className="employee-detail-form-spacing">
                     <Label>Start Date</Label>
                     <Input type="date" value={deductionForm.start_date} onChange={(e) => setDeductionForm({ ...deductionForm, start_date: e.target.value })} required />
                   </div>
-                  <div>
+                  <div className="employee-detail-form-spacing">
                     <Label>End Date (optional)</Label>
                     <Input type="date" value={deductionForm.end_date} onChange={(e) => setDeductionForm({ ...deductionForm, end_date: e.target.value })} />
                   </div>
-                  <Button type="submit" disabled={addDeduction.isPending}>
+                  <Button type="submit" className="employee-detail-submit-btn" disabled={addDeduction.isPending}>
                     Add Deduction
                   </Button>
                 </form>
@@ -294,7 +296,7 @@ export default function EmployeeDetailPage() {
                     </div>
                     <div className="employee-detail-item-right">
                       <p className="employee-detail-item-name">{d.percentage}%</p>
-                      <span className={`employee-detail-status-small ${d.is_active ? "active" : ""}`}>
+                      <span className={`employee-detail-status-small ${d.is_active ? "active" : "ended"}`}>
                         {d.is_active ? "Active" : "Ended"}
                       </span>
                     </div>
@@ -312,10 +314,10 @@ export default function EmployeeDetailPage() {
 function Row({ label, value, negative, bold }) {
   return (
     <div className="employee-detail-row">
-      <span className={`employee-detail-row-label ${bold ? "bold" : ""}`}>
+      <span className={`employee-detail-row-label ${bold ? "bold" : "muted"}`}>
         {label}
       </span>
-      <span className={`employee-detail-row-value ${bold ? "bold" : ""} ${negative ? "negative" : ""}`}>
+      <span className={`employee-detail-row-value ${bold ? "bold" : "medium"} ${negative ? "negative" : "primary"}`}>
         {negative ? "−" : ""}${Math.abs(value).toLocaleString(undefined, { minimumFractionDigits: 2 })}
       </span>
     </div>
