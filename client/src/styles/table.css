@@ -31,7 +31,7 @@
 
 .table-row {
   border-bottom: 1px solid var(--border);
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
 }
 
 .table-row:hover {
@@ -52,14 +52,17 @@
   color: var(--muted-foreground);
 }
 
-.table-head:has([role="checkbox"]),
-.table-cell:has([role="checkbox"]) {
+.table-head:has([role="checkbox"]) {
   padding-right: 0;
 }
 
 .table-cell {
   padding: 1rem;
   vertical-align: middle;
+}
+
+.table-cell:has([role="checkbox"]) {
+  padding-right: 0;
 }
 
 .table-caption {
