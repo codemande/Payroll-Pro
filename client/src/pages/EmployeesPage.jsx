@@ -71,8 +71,14 @@ export default function EmployeesPage() {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
       setDialogOpen(false);
       setForm({ 
-        employee_number: "", first_name: "", last_name: "", email: "", 
-        phone: "", position_id: "", base_salary: "", tax_rate: "", 
+        employee_number: "", 
+        first_name: "", 
+        last_name: "", 
+        email: "", 
+        phone: "", 
+        position_id: "", 
+        base_salary: "", 
+        tax_rate: "", 
         hire_date: new Date().toISOString().split("T")[0] 
       });
       toast.success("Employee added successfully");
@@ -200,20 +206,20 @@ export default function EmployeesPage() {
                 <tr key={emp._id} className="employees-table-row">
                   <td className="employees-td">
                     <div>
-                      <p className="employees-name-text">{emp.first_name} {emp.last_name}</p>
-                      <p className="employees-number-text">#{emp.employee_number}</p>
+                      <p className="employees-name-text">{emp.firstName} {emp.lastName}</p>
+                      <p className="employees-number-text">#{emp.employeeNumber}</p>
                     </div>
                   </td>
                   <td className="employees-td text-foreground">
                     {emp.position?.title || <span className="employees-muted-text">—</span>}
                   </td>
                   <td className="employees-td text-right font-medium text-foreground">
-                    ${Number(emp.base_salary).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    ${Number(emp.baseSalary).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </td>
-                  <td className="employees-td text-right text-foreground">{emp.tax_rate}%</td>
+                  <td className="employees-td text-right text-foreground">{emp.taxRate}%</td>
                   <td className="employees-td text-center">
-                    <span className={`employees-status-badge ${emp.is_active ? "active" : "inactive"}`}>
-                      {emp.is_active ? "Active" : "Inactive"}
+                    <span className={`employees-status-badge ${emp.isActive ? "active" : "inactive"}`}>
+                      {emp.isActive ? "Active" : "Inactive"}
                     </span>
                   </td>
                   <td className="employees-td text-center">
