@@ -31,15 +31,15 @@ export default function EmployeesPage() {
   const [search, setSearch] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [form, setForm] = useState({
-    employee_number: "",
-    first_name: "",
-    last_name: "",
+    employeeNumber: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
-    position_id: "",
-    base_salary: "",
-    tax_rate: "",
-    hire_date: new Date().toISOString().split("T")[0],
+    position: "",
+    baseSalary: "",
+    taxRate: "",
+    hireDate: new Date().toISOString().split("T")[0],
   });
 
   const { data: employees = [], isLoading } = useQuery({
@@ -50,7 +50,6 @@ export default function EmployeesPage() {
     },
   });
 
-  // Mock positions data - replace with your API if needed
   const { data: positions = [] } = useQuery({
     queryKey: ["positions"],
     queryFn: async () => {
@@ -63,23 +62,23 @@ export default function EmployeesPage() {
     mutationFn: async () => {
       await api.post("/employees", {
         ...form,
-        base_salary: Number(form.base_salary),
-        tax_rate: Number(form.tax_rate),
+        baseSalary: Number(form.baseSalary),
+        taxRate: Number(form.taxRate),
       });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
       setDialogOpen(false);
       setForm({ 
-        employee_number: "", 
-        first_name: "", 
-        last_name: "", 
+        employeeNumber: "", 
+        firstName: "", 
+        lastName: "", 
         email: "", 
         phone: "", 
-        position_id: "", 
-        base_salary: "", 
-        tax_rate: "", 
-        hire_date: new Date().toISOString().split("T")[0] 
+        position: "", 
+        baseSalary: "", 
+        taxRate: "", 
+        hireDate: new Date().toISOString().split("T")[0] 
       });
       toast.success("Employee added successfully");
     },
@@ -87,7 +86,7 @@ export default function EmployeesPage() {
   });
 
   const filtered = employees.filter((e) =>
-    `${e.first_name} ${e.last_name} ${e.employee_number}`
+    `${e.firstName} ${e.lastName} ${e.employeeNumber}`
       .toLowerCase()
       .includes(search.toLowerCase())
   );
@@ -118,19 +117,19 @@ export default function EmployeesPage() {
             >
               <div className="employees-form-item">
                 <Label>Employee #</Label>
-                <Input value={form.employee_number} onChange={(e) => setForm({ ...form, employee_number: e.target.value })} required />
+                <Input value={form.employeeNumber} onChange={(e) => setForm({ ...form, employeeNumber: e.target.value })} required />
               </div>
               <div className="employees-form-item">
                 <Label>Hire Date</Label>
-                <Input type="date" value={form.hire_date} onChange={(e) => setForm({ ...form, hire_date: e.target.value })} required />
+                <Input type="date" value={form.hireDate} onChange={(e) => setForm({ ...form, hireDate: e.target.value })} required />
               </div>
               <div className="employees-form-item">
                 <Label>First Name</Label>
-                <Input value={form.first_name} onChange={(e) => setForm({ ...form, first_name: e.target.value })} required />
+                <Input value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} required />
               </div>
               <div className="employees-form-item">
                 <Label>Last Name</Label>
-                <Input value={form.last_name} onChange={(e) => setForm({ ...form, last_name: e.target.value })} required />
+                <Input value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} required />
               </div>
               <div className="employees-form-item">
                 <Label>Email</Label>
@@ -142,7 +141,7 @@ export default function EmployeesPage() {
               </div>
               <div className="employees-form-item">
                 <Label>Position</Label>
-                <Select value={form.position_id} onValueChange={(v) => setForm({ ...form, position_id: v })}>
+                <Select value={form.position} onValueChange={(v) => setForm({ ...form, position: v })}>
                   <SelectTrigger><SelectValue placeholder="Select position" /></SelectTrigger>
                   <SelectContent>
                     {positions.map((p) => (
@@ -153,11 +152,11 @@ export default function EmployeesPage() {
               </div>
               <div className="employees-form-item">
                 <Label>Base Salary (Monthly)</Label>
-                <Input type="number" step="0.01" value={form.base_salary} onChange={(e) => setForm({ ...form, base_salary: e.target.value })} required />
+                <Input type="number" step="0.01" value={form.baseSalary} onChange={(e) => setForm({ ...form, baseSalary: e.target.value })} required />
               </div>
               <div className="employees-form-item col-span-2">
                 <Label>Tax Rate (%)</Label>
-                <Input type="number" step="0.01" value={form.tax_rate} onChange={(e) => setForm({ ...form, tax_rate: e.target.value })} required />
+                <Input type="number" step="0.01" value={form.taxRate} onChange={(e) => setForm({ ...form, taxRate: e.target.value })} required />
               </div>
               <div className="col-span-2">
                 <Button type="submit" className="employees-submit-btn" disabled={addEmployee.isPending}>
