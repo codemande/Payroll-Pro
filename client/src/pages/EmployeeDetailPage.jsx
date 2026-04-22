@@ -122,8 +122,8 @@ export default function EmployeeDetailPage() {
     return <p className="employee-detail-loading">Loading...</p>;
   }
 
-  const monthlySalary = Number(employee.base_salary);
-  const monthlyTax = (monthlySalary * Number(employee.tax_rate)) / 100;
+  const monthlySalary = Number(employee.baseSalary);
+  const monthlyTax = (monthlySalary * Number(employee.taxRate)) / 100;
   const activeDeductions = deductions.filter((d) => d.is_active);
   const totalDeductionPct = activeDeductions.reduce((sum, d) => sum + Number(d.percentage), 0);
   const monthlyDeductions = (monthlySalary * totalDeductionPct) / 100;
@@ -143,14 +143,14 @@ export default function EmployeeDetailPage() {
       <div className="employee-detail-header">
         <div>
           <h1 className="employee-detail-name font-display">
-            {employee.first_name} {employee.last_name}
+            {employee.firstName} {employee.lastName}
           </h1>
           <p className="employee-detail-info">
-            #{employee.employee_number} · {employee.position?.title || "No position"} · {employee.position?.department || ""}
+            #{employee.employeeNumber} · {employee.position?.title || "No position"} · {employee.position?.department || ""}
           </p>
         </div>
-        <span className={`employee-detail-status ${employee.is_active ? "active" : "inactive"}`}>
-          {employee.is_active ? "Active" : "Inactive"}
+        <span className={`employee-detail-status ${employee.isActive ? "active" : "inactive"}`}>
+          {employee.isActive ? "Active" : "Inactive"}
         </span>
       </div>
 
@@ -161,7 +161,7 @@ export default function EmployeeDetailPage() {
           </CardHeader>
           <CardContent className="employee-detail-card-content">
             <Row label="Gross Salary" value={monthlySalary} />
-            <Row label={`Tax (${employee.tax_rate}%)`} value={-monthlyTax} negative />
+            <Row label={`Tax (${employee.taxRate}%)`} value={-monthlyTax} negative />
             {activeDeductions.map((d) => (
               <Row key={d._id} label={`${d.deduction_type?.name} (${d.percentage}%)`} value={-(monthlySalary * Number(d.percentage)) / 100} negative />
             ))}
