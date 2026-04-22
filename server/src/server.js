@@ -6,7 +6,8 @@ import connectDB from "./config/db.js";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import positionRoutes from "./routes/positionRoutes.js";
-import payrollRoutes from "./routes/payrollRoutes.js"
+import payrollRoutes from "./routes/payrollRoutes.js";
+import deductionTypeRoute from "./routes/deductionTypeRoutes.js";
 
 // Initialize express app
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/positions", positionRoutes);
 app.use("/api/payroll", payrollRoutes);
+app.use("/api/deduction-types", deductionTypeRoute);
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
