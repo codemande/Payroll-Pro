@@ -78,9 +78,10 @@ export default function EmployeeDetailPage() {
     mutationFn: async () => {
       if (!employee) return;
       const salary = parseFloat(newSalary);
-      await api.put(`/employees/${id}`, { 
-        base_salary: salary,
-        salary_reason: salaryReason || null 
+      await api.post(`/employees/${id}/salary-history`, { 
+        previousSalary: employee.baseSalary,
+        newSalary: salary,
+        reason: salaryReason || null 
       });
     },
     onSuccess: () => {
@@ -227,10 +228,10 @@ export default function EmployeeDetailPage() {
                 {salaryHistory.map((h) => (
                   <div key={h._id} className="employee-detail-list-item">
                     <div>
-                      <p className="employee-detail-list-main">${Number(h.previous_salary).toLocaleString()} → ${Number(h.new_salary).toLocaleString()}</p>
+                      <p className="employee-detail-list-main">${Number(h.previousSalary).toLocaleString()} → ${Number(h.newSalary).toLocaleString()}</p>
                       <p className="employee-detail-subtext">{h.reason || "No reason"}</p>
                     </div>
-                    <span className="employee-detail-subtext">{new Date(h.effective_date).toLocaleDateString()}</span>
+                    <span className="employee-detail-subtext">{new Date(h.effectiveDate).toLocaleDateString()}</span>
                   </div>
                 ))}
               </div>
