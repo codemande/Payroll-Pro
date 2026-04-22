@@ -99,10 +99,10 @@ export default function EmployeeDetailPage() {
   const addDeduction = useMutation({
     mutationFn: async () => {
       await api.post(`/employees/${id}/deductions`, {
-        deduction_type_id: deductionForm.deduction_type_id,
+        deductionType: deductionForm.deduction_type_id,
         percentage: parseFloat(deductionForm.percentage),
-        start_date: deductionForm.start_date,
-        end_date: deductionForm.end_date || null,
+        startDate: deductionForm.start_date,
+        endDate: deductionForm.end_date || null,
       });
     },
     onSuccess: () => {
@@ -292,7 +292,7 @@ export default function EmployeeDetailPage() {
                     <div>
                       <p className="employee-detail-item-name">{d.deductionType?.name}</p>
                       <p className="employee-detail-subtext">
-                        {d.startDate} {d.endDate ? `→ ${d.endDate}` : "(ongoing)"}
+                        {new Date(d.startDate).toLocaleDateString()} {d.endDate ? `→ ${ new Date(d.endDate).toLocaleDateString()}` : "(ongoing)"}
                       </p>
                     </div>
                     <div className="employee-detail-item-right">
