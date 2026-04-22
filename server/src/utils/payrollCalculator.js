@@ -6,7 +6,7 @@ const calculatePayroll = async (employee) => {
 
   let tax = (baseSalary * employee.taxRate) / 100;
 
-  const deductions = await EmployeeDeduction.findOne({
+  const deductions = await EmployeeDeduction.find({
     employee: employee._id,
     isActive: true
   });
