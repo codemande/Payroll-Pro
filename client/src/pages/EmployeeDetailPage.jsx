@@ -124,7 +124,7 @@ export default function EmployeeDetailPage() {
 
   const monthlySalary = Number(employee.baseSalary);
   const monthlyTax = (monthlySalary * Number(employee.taxRate)) / 100;
-  const activeDeductions = deductions.filter((d) => d.is_active);
+  const activeDeductions = deductions.filter((d) => d.isActive);
   const totalDeductionPct = activeDeductions.reduce((sum, d) => sum + Number(d.percentage), 0);
   const monthlyDeductions = (monthlySalary * totalDeductionPct) / 100;
   const monthlyNet = monthlySalary - monthlyTax - monthlyDeductions;
@@ -163,7 +163,7 @@ export default function EmployeeDetailPage() {
             <Row label="Gross Salary" value={monthlySalary} />
             <Row label={`Tax (${employee.taxRate}%)`} value={-monthlyTax} negative />
             {activeDeductions.map((d) => (
-              <Row key={d._id} label={`${d.deduction_type?.name} (${d.percentage}%)`} value={-(monthlySalary * Number(d.percentage)) / 100} negative />
+              <Row key={d._id} label={`${d.deductionType?.name} (${d.percentage}%)`} value={-(monthlySalary * Number(d.percentage)) / 100} negative />
             ))}
             <div className="employee-detail-net-wrapper">
               <Row label="Net Salary" value={monthlyNet} bold />
@@ -289,15 +289,15 @@ export default function EmployeeDetailPage() {
                 {deductions.map((d) => (
                   <div key={d._id} className="employee-detail-list-item">
                     <div>
-                      <p className="employee-detail-item-name">{d.deduction_type?.name}</p>
+                      <p className="employee-detail-item-name">{d.deductionType?.name}</p>
                       <p className="employee-detail-subtext">
-                        {d.start_date} {d.end_date ? `→ ${d.end_date}` : "(ongoing)"}
+                        {d.startDate} {d.endDate ? `→ ${d.endDate}` : "(ongoing)"}
                       </p>
                     </div>
                     <div className="employee-detail-item-right">
                       <p className="employee-detail-item-name">{d.percentage}%</p>
-                      <span className={`employee-detail-status-small ${d.is_active ? "active" : "ended"}`}>
-                        {d.is_active ? "Active" : "Ended"}
+                      <span className={`employee-detail-status-small ${d.isActive ? "active" : "ended"}`}>
+                        {d.isActive ? "Active" : "Ended"}
                       </span>
                     </div>
                   </div>

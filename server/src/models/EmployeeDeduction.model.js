@@ -16,7 +16,7 @@ const employeeDeductionSchema = new Schema(
 
     startDate: {
       type: Date,
-      default: Date.now()
+      default: Date.now
     },
 
     endDate: Date,
