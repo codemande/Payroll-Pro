@@ -3,7 +3,7 @@ import { createEmployee, getEmployees, getEmployeeById, updateEmployee, deleteEm
 import admin from "../middleware/adminMiddleware.js";
 import auth from "../middleware/authMiddleware.js";
 import deductionRoutes from "./deductionRoutes.js";
-import SalaryHistoryRoutes from "../models/SalaryHistory.model.js";
+import SalaryHistoryRoutes from "../routes/salaryHistoryRoutes.js";
 
 const router = express.Router();
 
