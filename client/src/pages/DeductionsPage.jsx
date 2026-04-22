@@ -25,29 +25,29 @@ export default function DeductionsPage() {
   const [form, setForm] = useState({
     name: "",
     description: "",
-    default_percentage: "",
+    defaultPercentage: "",
   });
 
   const { data: deductionTypes = [] } = useQuery({
     queryKey: ["deduction-types"],
     queryFn: async () => {
-      const res = await api.get("/deductions");
+      const res = await api.get("/deduction-types");
       return res.data;
     },
   });
 
   const addType = useMutation({
     mutationFn: async () => {
-      await api.post("/deductions", {
+      await api.post("/deduction-types", {
         name: form.name,
         description: form.description || null,
-        default_percentage: parseFloat(form.default_percentage) || 0,
+        defaultPercentage: parseFloat(form.defaultPercentage) || 0,
       });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["deduction-types"] });
       setDialogOpen(false);
-      setForm({ name: "", description: "", default_percentage: "" });
+      setForm({ name: "", description: "", defaultPercentage: "" });
       toast.success("Deduction type added");
     },
     onError: (err) =>
@@ -111,11 +111,11 @@ export default function DeductionsPage() {
                 <Input
                   type="number"
                   step="0.01"
-                  value={form.default_percentage}
+                  value={form.defaultPercentage}
                   onChange={(e) =>
                     setForm({
                       ...form,
-                      default_percentage: e.target.value,
+                      defaultPercentage: e.target.value,
                     })
                   }
                   required
@@ -151,16 +151,16 @@ export default function DeductionsPage() {
 
                   <span
                     className={`deduction-status-badge ${
-                      dt.is_active !== false ? "active" : "inactive"
+                      dt.isActive !== false ? "active" : "inactive"
                     }`}
                   >
-                    {dt.is_active !== false ? "Active" : "Inactive"}
+                    {dt.isActive !== false ? "Active" : "Inactive"}
                   </span>
                 </div>
 
                 <div className="deduction-rate-box">
                   <p className="deduction-rate-label">Default Rate</p>
-                  <p className="deduction-rate-value">{dt.default_percentage}%</p>
+                  <p className="deduction-rate-value">{dt.      defaultPercentage}%</p>
                 </div>
               </CardContent>
             </Card>
