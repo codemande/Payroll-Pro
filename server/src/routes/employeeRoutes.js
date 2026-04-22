@@ -3,6 +3,7 @@ import { createEmployee, getEmployees, getEmployeeById, updateEmployee, deleteEm
 import admin from "../middleware/adminMiddleware.js";
 import auth from "../middleware/authMiddleware.js";
 import deductionRoutes from "./deductionRoutes.js";
+import SalaryHistoryRoutes from "../models/SalaryHistory.model.js";
 
 const router = express.Router();
 
@@ -16,6 +17,8 @@ router.put("/:id", auth, admin, updateEmployee );
 
 router.delete("/:id", auth, admin, deleteEmployee );
 
+// Nested Routes
 router.use("/:id/deductions", deductionRoutes);
+router.use("/:id/salary-history", SalaryHistoryRoutes);
 
 export default router;
