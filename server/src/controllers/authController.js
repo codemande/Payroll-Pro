@@ -67,6 +67,17 @@ const login = async (req, res) => {
 
 };
 
+// Logout controller
+const logout = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
+  
+  res.json({ message: "Logout successful" });
+};
+
 //Current User
 const getMe = async (req, res) => {
   try {
@@ -88,5 +99,6 @@ const getMe = async (req, res) => {
 export {
   register,
   login,
-  getMe
+  getMe,
+  logout
 };
