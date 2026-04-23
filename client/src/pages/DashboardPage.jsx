@@ -11,8 +11,7 @@ export default function DashboardPage() {
     queryKey: ["employees"],
     queryFn: async () => {
       const res = await api.get("/employees");
-      // Original logic filtered by is_active at the source
-      return res.data.filter(e => e.is_active !== false);
+      return res.data.filter(e => e.isActive !== false);
     },
   });
 
@@ -25,7 +24,7 @@ export default function DashboardPage() {
   });
 
   const totalMonthly = employees.reduce(
-    (sum, e) => sum + Number(e.base_salary || 0),
+    (sum, e) => sum + Number(e.baseSalary || 0),
     0
   );
 
@@ -33,7 +32,7 @@ export default function DashboardPage() {
 
   const totalTax = employees.reduce(
     (sum, e) =>
-      sum + (Number(e.base_salary || 0) * Number(e.tax_rate || 0)) / 100,
+      sum + (Number(e.baseSalary || 0) * Number(e.taxRate || 0)) / 100,
     0
   );
 
