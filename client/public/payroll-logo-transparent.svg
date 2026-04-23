@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!--
+    Payroll Logo — Transparent Background
+    Primary color: hsl(38, 90%, 55%)
+    Works on both light and dark backgrounds.
+    The P-bowl cutout uses currentColor trick for adaptability,
+    but the bars are transparent (cut from the gold shape).
+  -->
+
+  <!-- Outer decorative hex ring -->
+  <polygon
+    points="100,12 157,45 157,115 100,148 43,115 43,45"
+    fill="none"
+    stroke="hsl(38,90%,55%)"
+    stroke-width="1.2"
+    opacity="0.45"
+  />
+
+  <!-- Main hex border (no fill — fully transparent) -->
+  <polygon
+    points="100,20 152,50 152,110 100,140 48,110 48,50"
+    fill="none"
+    stroke="hsl(38,90%,55%)"
+    stroke-width="3"
+  />
+
+  <!-- Inner hex frame accent -->
+  <polygon
+    points="100,30 142,54 142,106 100,130 58,106 58,54"
+    fill="none"
+    stroke="hsl(38,90%,55%)"
+    stroke-width="1"
+    opacity="0.4"
+  />
+
+  <!-- Corner dots -->
+  <circle cx="48"  cy="80" r="2.5" fill="hsl(38,90%,55%)" opacity="0.6"/>
+  <circle cx="152" cy="80" r="2.5" fill="hsl(38,90%,55%)" opacity="0.6"/>
+  <!-- Tick lines -->
+  <line x1="43" y1="80" x2="48" y2="80" stroke="hsl(38,90%,55%)" stroke-width="1.2" opacity="0.5"/>
+  <line x1="152" y1="80" x2="157" y2="80" stroke="hsl(38,90%,55%)" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- ─── Peso/Payroll "P" monogram ─── -->
+  <!--
+    Built with a compound path so the two currency bars
+    are punched through as transparent holes — revealing
+    whatever background sits beneath.
+  -->
+  <path
+    fill-rule="evenodd"
+    fill="hsl(38,90%,55%)"
+    d="
+      M 88 52
+      L 96 52
+      Q 128 52 128 68
+      Q 128 84 96 84
+      L 96 108
+      L 88 108
+      Z
+
+      M 96 60
+      Q 118 60 118 68
+      Q 118 76 96 76
+      Z
+
+      M 82 63
+      L 108 63
+      L 108 67
+      L 82 67
+      Z
+
+      M 82 73
+      L 108 73
+      L 108 77
+      L 82 77
+      Z
+    "
+  />
+</svg>

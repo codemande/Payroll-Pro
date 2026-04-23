@@ -160,7 +160,7 @@ export default function DeductionsPage() {
 
                 <div className="deduction-rate-box">
                   <p className="deduction-rate-label">Default Rate</p>
-                  <p className="deduction-rate-value">{dt.      defaultPercentage}%</p>
+                  <p className="deduction-rate-value">{dt.defaultPercentage}%</p>
                 </div>
               </CardContent>
             </Card>

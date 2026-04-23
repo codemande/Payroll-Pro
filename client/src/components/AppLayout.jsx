@@ -30,9 +30,10 @@ export default function AppLayout({ children }) {
       <aside className="sidebar">
         {/* Logo Section */}
         <div className="sidebar-header">
-          <div className="sidebar-logo-box">
+          {/* <div className="sidebar-logo-box">
             <Receipt className="sidebar-logo-icon" size={16} />
-          </div>
+          </div> */}
+          <img src="/payroll-logo-transparent.svg" alt="payroll logo" className="sidebar-logo"/>
           <span className="sidebar-logo-text font-display">
             PayrollPro
           </span>
