@@ -86,7 +86,7 @@ export default function EmployeesPage() {
   });
 
   const filtered = employees.filter((e) =>
-    `${e.firstName} ${e.lastName} ${e.employeeNumber}`
+    `${e.firstName} ${e.lastName} ${e.employeeNumber} ${e.position?.title}`
       .toLowerCase()
       .includes(search.toLowerCase())
   );
