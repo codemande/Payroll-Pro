@@ -17,9 +17,23 @@ const PORT = process.env.PORT || 8000
 // Connect to MongoDB database
 connectDB();
 
+const allowedOrigins = [
+  "http://localhost:5173",                  
+  "https://payroll-pro-lilac.vercel.app" 
+];
+
 app.use(cors({
-  origin: "http://localhost:5173", 
-  credentials: true,               
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
